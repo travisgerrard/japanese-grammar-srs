@@ -1196,6 +1196,329 @@ const RAW_LESSONS = [
     estimatedStudyTime: 25
   });
 
+  RAW_LESSONS.push({
+    id: 26,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Using 「から」 and 「まで」 for Ranges',
+    grammarPoints: [
+      '「から」 specifies the starting point of a range.',
+      '「まで」 specifies the ending point of a range.'
+    ],
+    explanation: `
+  「から」 and 「まで」 are used together to indicate a range in time, location, or other contexts.
+  
+  Examples:
+  - 朝から晩まで働きます。 (Asa kara ban made hatarakimasu.) - "Work from morning until night."
+  - 東京から大阪まで新幹線で行きます。 (Toukyou kara Osaka made shinkansen de ikimasu.) - "Go from Tokyo to Osaka by bullet train."
+      `,
+    examples: [
+      {
+        japanese: 'ここから駅まで歩きます。',
+        romanji: 'Koko kara eki made arukimasu.',
+        english: 'I walk from here to the station.'
+      },
+      {
+        japanese: '春から夏までが一番好きです。',
+        romanji: 'Haru kara natsu made ga ichiban suki desu.',
+        english: 'I like the period from spring to summer the most.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「から」 indicate?',
+        options: ['Ending point', 'Starting point', 'Range', 'Direction'],
+        correctAnswer: 'Starting point',
+        explanation: '「から」 is used to indicate the starting point of a range.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 学校から家まで自転車で行きます。',
+        correctAnswer: 'I go from school to home by bicycle.',
+        explanation: '「から」 indicates the starting point, and 「まで」 indicates the endpoint.'
+      }
+    ],
+    difficulty: 6,
+    estimatedStudyTime: 20
+  });
+
+  RAW_LESSONS.push({
+    id: 27,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Expressing Frequency with 「ごとに」',
+    grammarPoints: [
+      '「ごとに」 is used to express regular intervals or frequency.'
+    ],
+    explanation: `
+  The expression 「ごとに」 means "every" or "at intervals." It follows nouns, counters, or time expressions.
+  
+  Examples:
+  - 一日ごとに運動します。 (Ichinichi goto ni undou shimasu.) - "I exercise every day."
+  - 駅ごとに停車します。 (Eki goto ni teisha shimasu.) - "It stops at every station."
+      `,
+    examples: [
+      {
+        japanese: '1時間ごとに休憩します。',
+        romanji: 'Ichi-jikan goto ni kyuukei shimasu.',
+        english: 'Take a break every hour.'
+      },
+      {
+        japanese: '3ページごとに図があります。',
+        romanji: 'San-peeji goto ni zu ga arimasu.',
+        english: 'There is a diagram every three pages.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「ごとに」 mean?',
+        options: ['Always', 'Every', 'Sometimes', 'Never'],
+        correctAnswer: 'Every',
+        explanation: '「ごとに」 expresses intervals or frequency.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 週ごとに会議があります。',
+        correctAnswer: 'There is a meeting every week.',
+        explanation: '「週ごとに」 means "every week."'
+      }
+    ],
+    difficulty: 7,
+    estimatedStudyTime: 25
+  });
+
+  RAW_LESSONS.push({
+    id: 28,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Expressing Preparation with 「〜ておく」',
+    grammarPoints: [
+      '「〜ておく」 indicates an action done in preparation for the future.'
+    ],
+    explanation: `
+  「〜ておく」 is used to express doing something in advance or as preparation.
+  
+  Examples:
+  - 椅子を準備しておきます。 (Isu o junbi shite okimasu.) - "I will prepare the chairs in advance."
+  - 旅行のために荷物をまとめておいた。 (Ryokou no tame ni nimotsu o matomete oita.) - "I packed my luggage in advance for the trip."
+      `,
+    examples: [
+      {
+        japanese: 'ノートにメモを取っておいてください。',
+        romanji: 'Nooto ni memo o totte oite kudasai.',
+        english: 'Please take notes in your notebook in advance.'
+      },
+      {
+        japanese: '今のうちにチケットを買っておきます。',
+        romanji: 'Ima no uchi ni chiketto o katte okimasu.',
+        english: 'I will buy the tickets now in preparation.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「〜ておく」 express?',
+        options: ['Obligation', 'Preparation', 'Permission', 'Regret'],
+        correctAnswer: 'Preparation',
+        explanation: '「〜ておく」 indicates an action done in preparation for the future.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 部屋を掃除しておきました。',
+        correctAnswer: 'I cleaned the room in advance.',
+        explanation: '「掃除しておきました」 means "cleaned in advance."'
+      }
+    ],
+    difficulty: 7,
+    estimatedStudyTime: 25
+  });
+
+  RAW_LESSONS.push({
+    id: 29,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Expressing Volition with 「〜つもり」',
+    grammarPoints: [
+      'Use 「〜つもり」 to express intention or plans.'
+    ],
+    explanation: `
+  「〜つもり」 is used to express one's intention or plan to do something. It follows the plain form of a verb.
+  
+  Examples:
+  - 日本に行くつもりです。 (Nihon ni iku tsumori desu.) - "I plan to go to Japan."
+  - 勉強するつもりはありません。 (Benkyou suru tsumori wa arimasen.) - "I have no intention to study."
+      `,
+    examples: [
+      {
+        japanese: '来週、新しい仕事を始めるつもりです。',
+        romanji: 'Raishuu, atarashii shigoto o hajimeru tsumori desu.',
+        english: 'I plan to start a new job next week.'
+      },
+      {
+        japanese: '旅行に行くつもりでしたが、行けませんでした。',
+        romanji: 'Ryokou ni iku tsumori deshita ga, ikemasen deshita.',
+        english: 'I planned to travel, but I couldn’t.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「〜つもり」 express?',
+        options: ['Past actions', 'Intention', 'Possibility', 'Prohibition'],
+        correctAnswer: 'Intention',
+        explanation: '「〜つもり」 expresses intention or plans.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 明日勉強するつもりです。',
+        correctAnswer: 'I plan to study tomorrow.',
+        explanation: '「勉強するつもり」 means "plan to study."'
+      }
+    ],
+    difficulty: 6,
+    estimatedStudyTime: 20
+  });
+
+  RAW_LESSONS.push({
+    id: 30,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Expressing Suggestions with 「〜たほうがいい」',
+    grammarPoints: [
+      'Use 「〜たほうがいい」 to give advice or make suggestions.'
+    ],
+    explanation: `
+  「〜たほうがいい」 is used to suggest what someone should do or to give advice. It follows the past tense (た-form) of a verb.
+  
+  Examples:
+  - もっと野菜を食べたほうがいいです。 (Motto yasai o tabeta hou ga ii desu.) - "You should eat more vegetables."
+  - 早く寝たほうがいいですよ。 (Hayaku neta hou ga ii desu yo.) - "You should sleep early."
+      `,
+    examples: [
+      {
+        japanese: '運動したほうがいいです。',
+        romanji: 'Undou shita hou ga ii desu.',
+        english: 'You should exercise.'
+      },
+      {
+        japanese: 'この薬を飲んだほうがいいですよ。',
+        romanji: 'Kono kusuri o nonda hou ga ii desu yo.',
+        english: 'You should take this medicine.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「〜たほうがいい」 express?',
+        options: ['Possibility', 'Prohibition', 'Suggestion', 'Intention'],
+        correctAnswer: 'Suggestion',
+        explanation: '「〜たほうがいい」 is used to suggest or give advice.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 遅く寝ないほうがいい。',
+        correctAnswer: 'You shouldn’t sleep late.',
+        explanation: '「寝ないほうがいい」 means "shouldn’t sleep late."'
+      }
+    ],
+    difficulty: 6,
+    estimatedStudyTime: 20
+  });
+
+  RAW_LESSONS.push({
+    id: 31,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Expressing Possibility with 「〜かもしれない」',
+    grammarPoints: [
+      'Use 「〜かもしれない」 to express possibility or uncertainty.'
+    ],
+    explanation: `
+  「〜かもしれない」 indicates that something might happen or may be true. It follows the plain form of verbs and adjectives.
+  
+  Examples:
+  - 明日は雨が降るかもしれない。 (Ashita wa ame ga furu kamoshirenai.) - "It might rain tomorrow."
+  - 彼は来ないかもしれません。 (Kare wa konai kamoshiremasen.) - "He might not come."
+      `,
+    examples: [
+      {
+        japanese: '午後には晴れるかもしれない。',
+        romanji: 'Gogo ni wa hareru kamoshirenai.',
+        english: 'It might be sunny in the afternoon.'
+      },
+      {
+        japanese: 'この本は難しいかもしれません。',
+        romanji: 'Kono hon wa muzukashii kamoshiremasen.',
+        english: 'This book might be difficult.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「〜かもしれない」 express?',
+        options: ['Possibility', 'Certainty', 'Intention', 'Prohibition'],
+        correctAnswer: 'Possibility',
+        explanation: '「〜かもしれない」 is used to express possibility or uncertainty.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 彼は忙しいかもしれません。',
+        correctAnswer: 'He might be busy.',
+        explanation: '「忙しいかもしれません」 means "might be busy."'
+      }
+    ],
+    difficulty: 7,
+    estimatedStudyTime: 25
+  });
+
+  RAW_LESSONS.push({
+    id: 32,
+    level: 'N4',
+    jlptLevel: 'Lower Intermediate',
+    title: 'Giving Reasons with 「ので」',
+    grammarPoints: [
+      'Use 「ので」 to explain reasons in a softer and more formal way.'
+    ],
+    explanation: `
+  「ので」 is used to explain reasons or causes. It’s often used in formal situations and sounds softer than 「から」.
+  
+  Examples:
+  - 急いでいるので、先に行きます。 (Isoide iru node, saki ni ikimasu.) - "I’m in a hurry, so I’ll go ahead."
+  - 天気が悪いので、外に出ません。 (Tenki ga warui node, soto ni demasen.) - "The weather is bad, so I won’t go outside."
+      `,
+    examples: [
+      {
+        japanese: '疲れたので、早く寝ます。',
+        romanji: 'Tsukareta node, hayaku nemasu.',
+        english: 'I’m tired, so I’ll sleep early.'
+      },
+      {
+        japanese: '雨が降っているので、傘を持っていきます。',
+        romanji: 'Ame ga futte iru node, kasa o motte ikimasu.',
+        english: 'It’s raining, so I’ll bring an umbrella.'
+      }
+    ],
+    quiz: [
+      {
+        type: 'multiple-choice',
+        question: 'What does 「ので」 express?',
+        options: ['Reason', 'Prohibition', 'Suggestion', 'Possibility'],
+        correctAnswer: 'Reason',
+        explanation: '「ので」 is used to explain reasons in a softer tone.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 学校が休みなので、家にいます。',
+        correctAnswer: 'Since school is closed, I’m at home.',
+        explanation: '「休みなので」 explains the reason for being at home.'
+      }
+    ],
+    difficulty: 7,
+    estimatedStudyTime: 25
+  });
+
 
 /**
  * We create a mutable copy of RAW_LESSONS,
