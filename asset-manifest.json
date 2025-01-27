@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/japanese-grammar-srs/static/css/main.ddf4dd48.css",
+    "main.js": "/japanese-grammar-srs/static/js/main.b0990e2c.js",
+    "static/js/453.b262d2b6.chunk.js": "/japanese-grammar-srs/static/js/453.b262d2b6.chunk.js",
+    "index.html": "/japanese-grammar-srs/index.html",
+    "main.ddf4dd48.css.map": "/japanese-grammar-srs/static/css/main.ddf4dd48.css.map",
+    "main.b0990e2c.js.map": "/japanese-grammar-srs/static/js/main.b0990e2c.js.map",
+    "453.b262d2b6.chunk.js.map": "/japanese-grammar-srs/static/js/453.b262d2b6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ddf4dd48.css",
+    "static/js/main.b0990e2c.js"
+  ]
+}
