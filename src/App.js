@@ -1,24 +1,30 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import './index.css';
+import ThemeToggle from './components/ThemeToggle';
 
 // Import the lessons and the global question bank
 import { GRAMMAR_LESSONS, QUESTION_BANK } from './lessons';
 
-/* ==============
-   Simple Button
-=============== */
+/* ===========================
+   2) UI BASICS
+=========================== */
 const Button = ({ children, variant = 'default', className = '', ...props }) => {
-  const baseClasses = 'px-4 py-2 rounded';
+  const baseClasses =
+    'px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200';
   const variantClasses = {
-    default: 'bg-blue-500 text-white',
-    outline: 'border border-blue-500 text-blue-500',
-    danger: 'bg-red-500 text-white'
+    default: 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800',
+    outline:
+      'border border-blue-500 text-blue-500 hover:bg-blue-50 dark:border-blue-300 dark:text-blue-300 dark:hover:bg-gray-700',
+    danger: 'bg-red-500 text-white hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800',
   };
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant] || ''} ${className}`}
+      className={`${baseClasses} ${
+        variantClasses[variant] || variantClasses.default
+      } ${className}`}
       {...props}
     >
       {children}
@@ -27,34 +33,37 @@ const Button = ({ children, variant = 'default', className = '', ...props }) => 
 };
 
 const Card = ({ children, className = '', ...props }) => (
-  <div className={`border rounded p-4 ${className}`} {...props}>
+  <div
+    className={`border border-gray-300 dark:border-gray-700 rounded p-4 bg-white dark:bg-gray-800 ${className}`}
+    {...props}
+  >
     {children}
   </div>
 );
 
 const CardHeader = ({ children, className = '', ...props }) => (
-  <div className={`mb-4 ${className}`} {...props}>
+  <div className={`mb-4 text-gray-900 dark:text-gray-100 ${className}`} {...props}>
     {children}
   </div>
 );
 
 const CardContent = ({ children, className = '', ...props }) => (
-  <div className={`${className}`} {...props}>
+  <div className={`text-gray-800 dark:text-gray-200 ${className}`} {...props}>
     {children}
   </div>
 );
 
 const Progress = ({ value = 0, className = '' }) => (
-  <div className={`w-full bg-gray-200 rounded-full h-2.5 ${className}`}>
+  <div className={`w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 ${className}`}>
     <div
-      className="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+      className="bg-blue-600 dark:bg-blue-400 h-2.5 rounded-full transition-all duration-300 ease-out"
       style={{ width: `${value}%` }}
     ></div>
   </div>
 );
 
 /* ===========================
-   LocalStorage-based SRS Logic
+   3) LOCALSTORAGE-BASED SRS LOGIC
 =========================== */
 const SRS_STORAGE_KEY = 'japaneseSRSData';
 
@@ -78,7 +87,7 @@ function initSRSRecord(questionId) {
     data[questionId] = {
       srsLevel: 0,
       nextReview: null,
-      lastWrongAt: null
+      lastWrongAt: null,
     };
     saveSRSData(data);
   }
@@ -119,14 +128,12 @@ function updateSRS(questionId, wasCorrect) {
   saveSRSData(data);
 }
 
-/** Return all "new" questions => srsLevel=0 (or no record). */
+/** Return all "new" questions => srsLevel=0 or no record. */
 function getNewQuestions() {
   const data = getSRSData();
   return QUESTION_BANK.filter((q) => {
     const r = data[q.id];
-    // If no record => new
     if (!r) return true;
-    // If srsLevel=0 => still new
     return r.srsLevel === 0;
   });
 }
@@ -155,7 +162,7 @@ function getMistakesQuestions() {
 }
 
 /* ===========================
-   Fuzzy Matching
+   4) FUZZY MATCH FOR TYPED ANSWERS
 =========================== */
 function levenshteinDistance(a, b) {
   const dp = [];
@@ -188,7 +195,29 @@ function fuzzyMatch(userAnswer, correctAnswer) {
 }
 
 /* ===========================
-   Lesson Quiz
+   5) OPTIONAL LESSON REFRESHER
+   Show snippet if user is wrong
+=========================== */
+function LessonRefresher({ lessonId }) {
+  const lesson = GRAMMAR_LESSONS.find((l) => l.id === lessonId);
+  if (!lesson) return null;
+
+  return (
+    <div className="mt-4 p-4 border rounded bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+      <h4 className="font-bold mb-2">Refresher: {lesson.title}</h4>
+      <p className="text-sm whitespace-pre-wrap">{lesson.explanation}</p>
+      <h5 className="font-bold mt-2">Key Grammar Points:</h5>
+      <ul className="list-disc pl-5 text-sm">
+        {lesson.grammarPoints.map((point) => (
+          <li key={point}>{point}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ===========================
+   6) LESSON-BASED QUIZ
 =========================== */
 const LessonQuiz = ({ lesson, onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -197,7 +226,7 @@ const LessonQuiz = ({ lesson, onComplete }) => {
   const [showExplanation, setShowExplanation] = useState(false);
   const [answeredCorrectly, setAnsweredCorrectly] = useState(null);
 
-  // Reset quiz if lesson changes
+  // Reset if lesson changes
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setSelectedAnswer('');
@@ -208,25 +237,17 @@ const LessonQuiz = ({ lesson, onComplete }) => {
 
   const currentQuestion = lesson?.quiz?.[currentQuestionIndex];
   if (!currentQuestion) {
-    return <p className="mt-4">No questions available.</p>;
+    return <p className="mt-4 text-gray-700 dark:text-gray-300">No questions available.</p>;
   }
 
-  const handleTextChange = (e) => {
-    setSelectedAnswer(e.target.value);
-  };
-
-  const handleAnswerSelect = (option) => {
-    setSelectedAnswer(option);
-  };
-
-  const submitAnswer = () => {
-    if (answeredCorrectly !== null) return; // Already submitted
+  function submitAnswer() {
+    if (answeredCorrectly !== null) return; // already answered
 
     let isCorrect = false;
     if (currentQuestion.type === 'multiple-choice') {
       isCorrect =
-        selectedAnswer.trim().toLowerCase() ===
-        currentQuestion.correctAnswer.trim().toLowerCase();
+        selectedAnswer.toLowerCase().trim() ===
+        currentQuestion.correctAnswer.toLowerCase().trim();
     } else {
       // translation / conjugation => fuzzy
       isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
@@ -238,49 +259,46 @@ const LessonQuiz = ({ lesson, onComplete }) => {
       setScore((prev) => prev + 1);
     }
 
-    // If you want these lesson-based questions tracked in SRS as well:
-    // (only if currentQuestion has an id)
+    // Optionally feed these into SRS
     if (currentQuestion.id) {
       updateSRS(currentQuestion.id, isCorrect);
     }
-  };
+  }
 
-  const goToNextQuestion = () => {
+  function goNext() {
     setAnsweredCorrectly(null);
     setShowExplanation(false);
     setSelectedAnswer('');
     if (currentQuestionIndex >= lesson.quiz.length - 1) {
-      onComplete(score + (answeredCorrectly ? 1 : 0));
+      onComplete(score);
     } else {
       setCurrentQuestionIndex((prev) => prev + 1);
     }
-  };
+  }
 
   const progressValue = ((currentQuestionIndex + 1) / lesson.quiz.length) * 100;
 
   return (
-    <Card className="bg-gray-100 mt-4">
-      <CardHeader className="text-xl font-bold">
+    <Card className="bg-gray-100 dark:bg-gray-800 mt-4">
+      <CardHeader className="text-xl font-bold text-gray-900 dark:text-gray-100">
         Quiz: {lesson.title}
       </CardHeader>
       <CardContent>
-        <p className="mb-2 text-sm text-gray-700">
+        <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
           Question {currentQuestionIndex + 1} of {lesson.quiz.length}
         </p>
         <Progress value={progressValue} className="mb-4" />
 
-        <p className="font-medium mb-4">{currentQuestion.question}</p>
+        <p className="font-medium mb-4 text-gray-800 dark:text-gray-200">{currentQuestion.question}</p>
 
-        {/* multiple choice */}
+        {/* If multiple-choice */}
         {currentQuestion.type === 'multiple-choice' && (
           <div className="grid grid-cols-2 gap-2 mt-2">
-            {currentQuestion.options?.map((option) => (
+            {currentQuestion.options.map((option) => (
               <Button
                 key={option}
-                className={
-                  selectedAnswer === option ? 'bg-blue-600 text-white' : ''
-                }
-                onClick={() => handleAnswerSelect(option)}
+                variant={selectedAnswer === option ? 'default' : 'outline'}
+                onClick={() => setSelectedAnswer(option)}
               >
                 {option}
               </Button>
@@ -288,39 +306,40 @@ const LessonQuiz = ({ lesson, onComplete }) => {
           </div>
         )}
 
-        {/* input for translation/conjugation */}
-        {(currentQuestion.type === 'translation' ||
-          currentQuestion.type === 'conjugation') && (
+        {/* If text-based input */}
+        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation') && (
           <input
             type="text"
-            className="w-full border border-gray-300 rounded px-2 py-1"
-            placeholder="Type your answer here..."
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            placeholder="Type your answer..."
             value={selectedAnswer}
-            onChange={handleTextChange}
+            onChange={(e) => setSelectedAnswer(e.target.value)}
           />
         )}
 
         <div className="mt-4 flex gap-2">
           <Button onClick={submitAnswer} disabled={!selectedAnswer} className="flex-1">
-            Submit
+            Submit Answer
           </Button>
           {showExplanation && (
-            <Button variant="outline" onClick={goToNextQuestion} className="flex-1">
+            <Button variant="outline" onClick={goNext} className="flex-1">
               {currentQuestionIndex < lesson.quiz.length - 1 ? 'Next' : 'Finish'}
             </Button>
           )}
         </div>
 
         {showExplanation && (
-          <div className="mt-4 p-3 border rounded bg-white">
+          <div className="mt-4 p-3 border rounded bg-white dark:bg-gray-700">
             {answeredCorrectly ? (
               <p className="text-green-600 font-semibold">Correct!</p>
             ) : (
               <p className="text-red-600 font-semibold">Incorrect</p>
             )}
-            <p className="text-gray-700 mt-2 whitespace-pre-wrap">
-              {currentQuestion.explanation}
-            </p>
+            {currentQuestion.explanation && (
+              <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-wrap">
+                {currentQuestion.explanation}
+              </p>
+            )}
           </div>
         )}
       </CardContent>
@@ -329,79 +348,63 @@ const LessonQuiz = ({ lesson, onComplete }) => {
 };
 
 /* ===========================
-   Single Lesson Detail
+   7) LESSON DETAIL
 =========================== */
-const GrammarLessonDetail = ({ lesson }) => {
+function GrammarLessonDetail({ lesson }) {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
 
-  const handleQuizComplete = (score) => {
-    setShowQuiz(false);
-    setQuizCompleted(true);
-    setFinalScore(score);
-  };
-
-  // If we switch to a new lesson, reset quiz states
+  // If the user switches lessons
   useEffect(() => {
     setShowQuiz(false);
     setQuizCompleted(false);
     setFinalScore(0);
   }, [lesson]);
 
+  function handleQuizComplete(score) {
+    setShowQuiz(false);
+    setQuizCompleted(true);
+    setFinalScore(score);
+  }
+
   return (
-    <div className="p-4 border-2 border-black rounded">
+    <div className="p-4 border-2 border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
       <h2 className="text-2xl font-bold mb-4">{lesson.title}</h2>
+
       <div className="grid md:grid-cols-2 gap-4">
-        {/* Explanation */}
         <div>
-          <h3 className="font-bold">Grammar Points:</h3>
-          <ul className="list-disc pl-5">
+          <h3 className="font-bold text-gray-800 dark:text-gray-200">Grammar Points:</h3>
+          <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300">
             {lesson.grammarPoints.map((point) => (
               <li key={point}>{point}</li>
             ))}
           </ul>
-          <p className="mt-4 whitespace-pre-wrap">{lesson.explanation}</p>
+          <p className="mt-4 whitespace-pre-wrap text-gray-700 dark:text-gray-300">{lesson.explanation}</p>
         </div>
-
-        {/* Examples */}
         <div>
-          <h3 className="font-bold">Examples:</h3>
-          {lesson.examples.map((example, i) => (
-            <div key={i} className="mb-2 p-2 bg-gray-50 rounded">
-              {example.japanese && <p>{example.japanese}</p>}
-              {example.romanji && (
-                <p className="text-sm text-gray-600">{example.romanji}</p>
-              )}
-              {example.english && <p className="text-sm">{example.english}</p>}
+          <h3 className="font-bold text-gray-800 dark:text-gray-200">Examples:</h3>
+          {lesson.examples.map((example, index) => (
+            <div key={index} className="mb-2 p-2 bg-gray-50 dark:bg-gray-700 rounded">
+              <p className="text-gray-900 dark:text-gray-100">{example.japanese}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{example.romanji}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">{example.english}</p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Difficulty & Time */}
       <div className="mt-4 flex justify-between items-center">
         <div>
           <span>Difficulty: {lesson.difficulty}/10</span>
-          <span className="ml-4">
-            Est. Study Time: {lesson.estimatedStudyTime} mins
-          </span>
+          <span className="ml-4">Est. Study Time: {lesson.estimatedStudyTime} mins</span>
         </div>
-        {!quizCompleted && (
-          <Button onClick={() => setShowQuiz(true)}>Start Quiz</Button>
-        )}
+        <Button onClick={() => setShowQuiz(true)}>Start Quiz</Button>
       </div>
-
-      {/* Quiz */}
-      {showQuiz && (
-        <LessonQuiz lesson={lesson} onComplete={handleQuizComplete} />
-      )}
-
-      {/* Final results */}
+      {showQuiz && <LessonQuiz lesson={lesson} onComplete={handleQuizComplete} />}
       {quizCompleted && (
-        <div className="mt-4 p-4 border rounded bg-green-50 text-center">
-          <h3 className="text-xl font-bold">Quiz Completed!</h3>
-          <p className="mt-2">
+        <div className="mt-4 p-4 border rounded bg-green-50 dark:bg-green-700 text-center">
+          <h3 className="text-xl font-bold text-green-600 dark:text-green-200">Quiz Completed!</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">
             You scored {finalScore} / {lesson.quiz.length}
           </p>
           <Button
@@ -419,12 +422,13 @@ const GrammarLessonDetail = ({ lesson }) => {
       )}
     </div>
   );
-};
+}
 
 /* ===========================
-   SRS Quiz
+   8) SRS QUIZ
+   (New, Review, or Mistakes)
 =========================== */
-const SRSQuiz = ({ title, questions, onDone }) => {
+function SRSQuiz({ title, questions, onDone }) {
   const [index, setIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [answeredCorrectly, setAnsweredCorrectly] = useState(null);
@@ -433,70 +437,71 @@ const SRSQuiz = ({ title, questions, onDone }) => {
 
   if (!questions.length) {
     return (
-      <div className="my-4 p-4 text-center border rounded bg-gray-50">
-        <h2 className="text-xl font-bold">{title}</h2>
-        <p className="mt-2">No questions available!</p>
+      <div className="my-4 p-4 text-center border rounded bg-gray-50 dark:bg-gray-700">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
+        <p className="mt-2 text-gray-700 dark:text-gray-300">No questions available!</p>
       </div>
     );
   }
 
   const currentQuestion = questions[index];
 
-  const submitAnswer = () => {
+  function submitAnswer() {
     if (answeredCorrectly !== null) return; // already answered
 
-    let isCorrect = false;
+    let isCorrect;
     if (currentQuestion.type === 'multiple-choice') {
       isCorrect =
         selectedAnswer.trim().toLowerCase() ===
         currentQuestion.correctAnswer.trim().toLowerCase();
     } else {
-      // translation / conjugation => fuzzy
+      // translation/conjugation => fuzzy
       isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
     }
 
     setAnsweredCorrectly(isCorrect);
     setShowExplanation(true);
-    if (isCorrect) setScore((prev) => prev + 1);
+    if (isCorrect) {
+      setScore((prev) => prev + 1);
+    }
 
     // Update SRS
     updateSRS(currentQuestion.id, isCorrect);
-  };
+  }
 
-  const goNext = () => {
+  function nextQuestion() {
     setAnsweredCorrectly(null);
     setShowExplanation(false);
     setSelectedAnswer('');
 
+    // end of quiz?
     if (index >= questions.length - 1) {
-      // done
       onDone(score + (answeredCorrectly ? 1 : 0));
     } else {
       setIndex((prev) => prev + 1);
     }
-  };
+  }
 
   const progressValue = ((index + 1) / questions.length) * 100;
 
   return (
-    <Card className="bg-gray-100 mt-4">
-      <CardHeader className="text-xl font-bold">{title}</CardHeader>
+    <Card className="bg-gray-100 dark:bg-gray-800 mt-4">
+      <CardHeader className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</CardHeader>
       <CardContent>
-        <p className="mb-2 text-sm text-gray-700">
+        <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
           Question {index + 1} of {questions.length}
         </p>
         <Progress value={progressValue} className="mb-4" />
 
-        <p className="font-medium mb-4">{currentQuestion.question}</p>
+        <p className="font-medium mb-4 text-gray-800 dark:text-gray-200">{currentQuestion.question}</p>
 
+        {/* If multiple choice */}
         {currentQuestion.type === 'multiple-choice' && (
           <div className="grid grid-cols-2 gap-2 mt-2">
             {currentQuestion.options?.map((option) => (
               <Button
                 key={option}
-                className={
-                  selectedAnswer === option ? 'bg-blue-600 text-white' : ''
-                }
+                variant={selectedAnswer === option ? 'default' : 'outline'}
                 onClick={() => setSelectedAnswer(option)}
               >
                 {option}
@@ -505,12 +510,12 @@ const SRSQuiz = ({ title, questions, onDone }) => {
           </div>
         )}
 
-        {(currentQuestion.type === 'translation' ||
-          currentQuestion.type === 'conjugation') && (
+        {/* If text-based */}
+        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation') && (
           <input
             type="text"
-            className="w-full border border-gray-300 rounded px-2 py-1"
-            placeholder="Type your answer here..."
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            placeholder="Type your answer..."
             value={selectedAnswer}
             onChange={(e) => setSelectedAnswer(e.target.value)}
             disabled={answeredCorrectly !== null}
@@ -522,31 +527,37 @@ const SRSQuiz = ({ title, questions, onDone }) => {
             Submit
           </Button>
           {showExplanation && (
-            <Button variant="outline" onClick={goNext} className="flex-1">
+            <Button variant="outline" onClick={nextQuestion} className="flex-1">
               {index < questions.length - 1 ? 'Next' : 'Finish'}
             </Button>
           )}
         </div>
 
         {showExplanation && (
-          <div className="mt-4 p-3 border rounded bg-white">
+          <div className="mt-4 p-3 border rounded bg-white dark:bg-gray-700">
             {answeredCorrectly ? (
               <p className="text-green-600 font-semibold">Correct!</p>
             ) : (
-              <p className="text-red-600 font-semibold">Incorrect</p>
+              <>
+                <p className="text-red-600 font-semibold">Incorrect</p>
+                {/* Show refresher for the original lesson if desired */}
+                <LessonRefresher lessonId={currentQuestion.lessonId} />
+              </>
             )}
-            <p className="text-gray-700 mt-2 whitespace-pre-wrap">
-              {currentQuestion.explanation}
-            </p>
+            {currentQuestion.explanation && (
+              <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-wrap">
+                {currentQuestion.explanation}
+              </p>
+            )}
           </div>
         )}
       </CardContent>
     </Card>
   );
-};
+}
 
 /* ===========================
-   Main App
+   9) MAIN APP
 =========================== */
 function App() {
   const [selectedLesson, setSelectedLesson] = useState(null);
@@ -560,9 +571,9 @@ function App() {
   const [showSrsResults, setShowSrsResults] = useState(false);
   const [srsScore, setSrsScore] = useState(0);
 
-  // If user picks an SRS mode, build the question array
   useEffect(() => {
     if (srsMode === 'none') {
+      // reset any SRS quiz state
       setSrsQuestions([]);
       setShowSrsResults(false);
       setSrsScore(0);
@@ -581,19 +592,21 @@ function App() {
     setSrsScore(0);
   }, [srsMode]);
 
-  const handleSrsDone = (finalScore) => {
+  function handleSrsDone(finalScore) {
     setSrsScore(finalScore);
     setShowSrsResults(true);
-  };
+  }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Top Nav (mobile only) */}
       <div className="md:hidden bg-blue-500 text-white flex justify-between items-center px-4 py-2">
         <h1 className="text-2xl font-bold">日本語 Grammar Mastery</h1>
+        <ThemeToggle />
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="focus:outline-none text-white"
+          className="focus:outline-none text-white ml-2"
+          aria-label="Toggle Sidebar"
         >
           {/* Hamburger icon */}
           <svg
@@ -611,18 +624,19 @@ function App() {
       {/* Sidebar */}
       <div
         className={`
-          bg-gray-100 p-4 md:w-1/4 border-r border-gray-300 md:block 
+          bg-gray-100 dark:bg-gray-800 p-4 md:w-1/4 border-r border-gray-300 dark:border-gray-700 
           ${isSidebarOpen ? 'block' : 'hidden'} 
           absolute md:relative top-0 left-0 w-full md:w-1/4 h-full md:h-auto
           z-10
+          hidden md:block
         `}
       >
-        {/* Close button in sidebar (mobile) */}
+        {/* Close button (mobile) */}
         <div className="flex justify-between items-center mb-4 md:hidden">
-          <h2 className="text-xl font-bold">Menu</h2>
-          <button onClick={() => setIsSidebarOpen(false)}>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Menu</h2>
+          <button onClick={() => setIsSidebarOpen(false)} className="focus:outline-none">
             <svg
-              className="w-6 h-6 text-gray-700"
+              className="w-6 h-6 text-gray-700 dark:text-gray-300"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -633,32 +647,34 @@ function App() {
           </button>
         </div>
 
-        {/* LESSONS */}
-        <h2 className="text-2xl font-bold mb-4 hidden md:block">Lessons</h2>
+        {/* LESSON LIST */}
+        <h2 className="text-2xl font-bold mb-4 hidden md:block text-gray-900 dark:text-gray-100">Lessons</h2>
         {GRAMMAR_LESSONS.map((lesson) => (
           <Button
             key={lesson.id}
             variant="outline"
             className={`w-full mb-2 text-left ${
-              selectedLesson?.id === lesson.id ? 'bg-blue-200 border-blue-600' : ''
+              selectedLesson?.id === lesson.id ? 'bg-blue-200 dark:bg-blue-700 border-blue-600 dark:border-blue-800' : ''
             }`}
             onClick={() => {
               setSelectedLesson(lesson);
               setIsSidebarOpen(false);
-              setSrsMode('none'); // exit SRS mode
+              setSrsMode('none');
             }}
           >
             {lesson.title} ({lesson.level})
           </Button>
         ))}
 
-        <hr className="my-4" />
+        <hr className="my-4 border-gray-300 dark:border-gray-700" />
 
         {/* SRS SECTION */}
-        <h2 className="text-xl font-bold mb-2">SRS Study</h2>
+        <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">SRS Study</h2>
         <Button
           variant="outline"
-          className={`w-full mb-2 text-left ${srsMode === 'new' ? 'bg-blue-200' : ''}`}
+          className={`w-full mb-2 text-left ${
+            srsMode === 'new' ? 'bg-blue-200 dark:bg-blue-700' : ''
+          }`}
           onClick={() => {
             setSrsMode('new');
             setSelectedLesson(null);
@@ -669,7 +685,9 @@ function App() {
         </Button>
         <Button
           variant="outline"
-          className={`w-full mb-2 text-left ${srsMode === 'review' ? 'bg-blue-200' : ''}`}
+          className={`w-full mb-2 text-left ${
+            srsMode === 'review' ? 'bg-blue-200 dark:bg-blue-700' : ''
+          }`}
           onClick={() => {
             setSrsMode('review');
             setSelectedLesson(null);
@@ -680,7 +698,9 @@ function App() {
         </Button>
         <Button
           variant="outline"
-          className={`w-full mb-2 text-left ${srsMode === 'mistakes' ? 'bg-blue-200' : ''}`}
+          className={`w-full mb-2 text-left ${
+            srsMode === 'mistakes' ? 'bg-blue-200 dark:bg-blue-700' : ''
+          }`}
           onClick={() => {
             setSrsMode('mistakes');
             setSelectedLesson(null);
@@ -695,38 +715,24 @@ function App() {
       <div className="flex-1 p-4 md:p-8">
         {/* Desktop Title */}
         <div className="hidden md:block text-center mb-6">
-          <h1 className="text-4xl font-bold">日本語 Grammar Mastery</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">日本語 Grammar Mastery</h1>
+          <ThemeToggle className="mt-2 mx-auto" />
         </div>
 
-        {selectedLesson && srsMode === 'none' && (
-          <GrammarLessonDetail lesson={selectedLesson} />
-        )}
+        {/* Lesson-based approach */}
+        {selectedLesson && srsMode === 'none' && <GrammarLessonDetail lesson={selectedLesson} />}
 
+        {/* SRS mode approach */}
         {!selectedLesson && srsMode !== 'none' && (
           <>
             {!showSrsResults ? (
-              <SRSQuiz
-                title={
-                  srsMode === 'new'
-                    ? 'New Questions'
-                    : srsMode === 'review'
-                    ? 'Review'
-                    : 'Mistakes (Last 24h)'
-                }
-                questions={srsQuestions}
-                onDone={handleSrsDone}
-              />
+              <SRSQuiz title={getSrsTitle(srsMode)} questions={srsQuestions} onDone={handleSrsDone} />
             ) : (
-              <div className="my-4 p-4 border rounded bg-green-50 text-center">
-                <h2 className="text-xl font-bold">
-                  {srsMode === 'new'
-                    ? 'New Questions'
-                    : srsMode === 'review'
-                    ? 'Review'
-                    : 'Mistakes'}
-                  {' '}Completed!
+              <div className="my-4 p-4 border rounded bg-green-50 dark:bg-green-700 text-center">
+                <h2 className="text-xl font-bold text-green-600 dark:text-green-200">
+                  {getSrsTitle(srsMode)} Completed!
                 </h2>
-                <p className="mt-2">
+                <p className="mt-2 text-gray-700 dark:text-gray-300">
                   You scored {srsScore} / {srsQuestions.length}
                 </p>
                 <Button
@@ -744,15 +750,31 @@ function App() {
           </>
         )}
 
-        {/* If no lesson selected and no SRS mode, show a message */}
+        {/* If no lesson & srsMode=none => prompt user */}
         {!selectedLesson && srsMode === 'none' && (
-          <div className="text-center text-gray-500 mt-20">
+          <div className="text-center text-gray-500 dark:text-gray-300 mt-20">
             Select a lesson or SRS mode to begin studying
           </div>
         )}
       </div>
     </div>
   );
+}
+
+/* ===========================
+   HELPER FUNCTION
+=========================== */
+function getSrsTitle(mode) {
+  switch (mode) {
+    case 'new':
+      return 'New Questions';
+    case 'review':
+      return 'Review';
+    case 'mistakes':
+      return 'Mistakes (Last 24h)';
+    default:
+      return '';
+  }
 }
 
 export default App;

@@ -2,8 +2,7 @@
 /* ===========================
    Grammar Lessons Data
 =========================== */
-const RAW_LESSONS = [
-    {
+const RAW_LESSONS = [{
       id: 1,
       level: 'N5',
       jlptLevel: 'Beginner',
@@ -51,6 +50,27 @@ const RAW_LESSONS = [
           options: ['に', 'が', 'で', 'を'],
           correctAnswer: 'が',
           explanation: 'が is used to mark the subject that is performing an action.'
+        },
+        // Additional Quiz Questions for Lesson 1
+        {
+          type: 'multiple-choice',
+          question: 'Which particle is used to indicate possession?',
+          options: ['の', 'に', 'が', 'を'],
+          correctAnswer: 'の',
+          explanation: '「の」 is used to indicate possession or describe relationships between nouns.'
+        },
+        {
+          type: 'translation',
+          question: 'Translate: 彼が本を読みます。',
+          correctAnswer: 'He reads a book.',
+          hint: 'Focus on the particles "が" and "を".'
+        },
+        {
+          type: 'multiple-choice',
+          question: 'Which particle marks the direct object?',
+          options: ['は', 'が', 'を', 'に'],
+          correctAnswer: 'を',
+          explanation: '「を」 (wo) marks the direct object of the sentence.'
         }
       ],
       difficulty: 5,
@@ -91,6 +111,26 @@ const RAW_LESSONS = [
           correctAnswer: 'I speak.',
           explanation:
             '話します (hanashimasu) is the polite present form of 話す (to speak). "I speak." or "He/She speaks." (depending on context).'
+        },
+        // Additional Quiz Questions for Lesson 2
+        {
+          type: 'conjugation',
+          question: 'Conjugate 話す (hanasu) to polite past tense.',
+          correctAnswer: '話しました',
+          explanation: 'Change the verb to its polite past form by replacing "す" with "しました".'
+        },
+        {
+          type: 'multiple-choice',
+          question: 'Which conjugation is correct for 食べる to polite past tense?',
+          options: ['食べました', '食べません', '食べて', '食べる'],
+          correctAnswer: '食べました',
+          explanation: '食べる conjugated to polite past tense is 食べました.'
+        },
+        {
+          type: 'translation',
+          question: 'Translate: 彼女は本を読みます。',
+          correctAnswer: 'She reads a book.',
+          hint: 'Identify the subject and object particles.'
         }
       ],
       difficulty: 6,
@@ -138,6 +178,26 @@ const RAW_LESSONS = [
           question: 'Conjugate the verb 食べる into 〜て form',
           correctAnswer: '食べて',
           explanation: 'For ru-verbs, just remove る and add て.'
+        },
+        // Additional Quiz Questions for Lesson 3
+        {
+          type: 'multiple-choice',
+          question: 'Which 〜て form is used to make a request?',
+          options: ['〜てください', '〜てもいい', '〜ている', '〜てしまう'],
+          correctAnswer: '〜てください',
+          explanation: '「〜てください」 is used to make polite requests.'
+        },
+        {
+          type: 'translation',
+          question: 'Translate: 本を読んで、ノートにメモしました。',
+          correctAnswer: 'I read a book and took notes in my notebook.',
+          hint: 'Look at how the 〜て form connects the two actions.'
+        },
+        {
+          type: 'conjugation',
+          question: 'Conjugate 開ける (akeru) into 〜て form.',
+          correctAnswer: '開けて',
+          explanation: 'For ru-verbs, remove "る" and add "て" to form the 〜て form.'
         }
       ],
       difficulty: 7,
@@ -197,6 +257,27 @@ const RAW_LESSONS = [
           options: ['Subject + Object + Verb', 'Subject + Verb + Object', 'Object + Subject + Verb'],
           correctAnswer: 'Subject + Object + Verb',
           explanation: 'Japanese sentences always end with the verb.'
+        },
+        // Additional Quiz Questions for Lesson 4
+        {
+          type: 'multiple-choice',
+          question: 'What is the correct sentence structure in Japanese?',
+          options: ['Subject + Verb + Object', 'Subject + Object + Verb', 'Verb + Subject + Object'],
+          correctAnswer: 'Subject + Object + Verb',
+          explanation: 'Japanese sentences typically follow the Subject + Object + Verb order.'
+        },
+        {
+          type: 'translation',
+          question: 'Translate: 私は映画を見ます。',
+          correctAnswer: 'I watch a movie.',
+          hint: 'Identify the subject, object, and verb.'
+        },
+        {
+          type: 'multiple-choice',
+          question: 'Which particle is used to mark the topic of the sentence?',
+          options: ['が', 'は', 'を', 'に'],
+          correctAnswer: 'は',
+          explanation: '「は」 is used as the topic marker in a sentence.'
         }
       ],
       difficulty: 4,
@@ -254,14 +335,31 @@ const RAW_LESSONS = [
           options: ['静かい部屋', '大きい家', '親切い人'],
           correctAnswer: '大きい家',
           explanation: '大きい家 (Ookii ie) means "A big house." 静か is a na-adjective.'
+        },
+        // Additional Quiz Questions for Lesson 5
+        {
+          type: 'multiple-choice',
+          question: 'Which adjective type requires 「な」 before a noun?',
+          options: ['i-adjectives', 'na-adjectives', 'verb adjectives', 'noun adjectives'],
+          correctAnswer: 'na-adjectives',
+          explanation: 'na-adjectives require 「な」 when modifying nouns.'
+        },
+        {
+          type: 'translation',
+          question: 'Translate: きれいな花',
+          correctAnswer: 'A beautiful flower.',
+          hint: '「きれい」 is a na-adjective meaning "beautiful."'
+        },
+        {
+          type: 'conjugation',
+          question: 'Conjugate 低い (hikui) into its negative form.',
+          correctAnswer: '低くない',
+          explanation: 'Remove 「い」 and add 「くない」 for the negative form of i-adjectives.'
         }
       ],
       difficulty: 5,
       estimatedStudyTime: 20
-    }
-  ];
-  
-  RAW_LESSONS.push({
+    },{
     id: 6,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -301,13 +399,37 @@ const RAW_LESSONS = [
         question: 'Translate: 彼も学生です。',
         correctAnswer: 'He is also a student.',
         explanation: '「も」 indicates inclusion or "also."'
+      },
+      // Additional Quiz Questions for Lesson 6
+      {
+        type: 'multiple-choice',
+        question: 'Which particle means "also" or "too"?',
+        options: ['も', 'は', 'が', 'を'],
+        correctAnswer: 'も',
+        explanation: '「も」 is used to express inclusion or "also."'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 彼も学生です。',
+        correctAnswer: 'He is also a student.',
+        explanation: '「も」 indicates inclusion or "also."'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Choose the correct usage of 「も」 in a sentence.',
+        options: [
+          '私は猫も好きです。',
+          '私は猫がも好きです。',
+          '私はも猫好きです。',
+          'も私は猫好きです。'
+        ],
+        correctAnswer: '私は猫も好きです。',
+        explanation: '「猫も」 correctly places 「も」 after the noun to indicate "also."'
       }
     ],
     difficulty: 4,
     estimatedStudyTime: 15
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 7,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -351,13 +473,31 @@ const RAW_LESSONS = [
         question: 'Translate: この車は高くないです。',
         correctAnswer: 'This car is not expensive.',
         explanation: '「高くない」 is the negative form of 高い.'
+      },
+      // Additional Quiz Questions for Lesson 7
+      {
+        type: 'multiple-choice',
+        question: 'What is the past form of 高い?',
+        options: ['高かった', '高くない', '高い', '高くなかった'],
+        correctAnswer: '高かった',
+        explanation: 'The past form of 高い is 高かった.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: この車は高くないです。',
+        correctAnswer: 'This car is not expensive.',
+        explanation: '「高くない」 is the negative form of 高い.'
+      },
+      {
+        type: 'conjugation',
+        question: 'Conjugate 低くない (hikukunai) into past negative form.',
+        correctAnswer: '低くなかった',
+        explanation: 'Remove 「ない」 and add 「なかった」 to form the past negative.'
       }
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 8,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -397,13 +537,37 @@ const RAW_LESSONS = [
         question: 'Translate: 日本の文化は面白いです。',
         correctAnswer: 'Japanese culture is interesting.',
         explanation: '「日本の文化」 means "Japanese culture."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 8
+{
+  type: 'multiple-choice',
+  question: 'What does 「の」 indicate?',
+  options: ['Direction', 'Possession', 'Subject', 'Object'],
+  correctAnswer: 'Possession',
+  explanation: '「の」 indicates possession or relationship between nouns.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 日本の文化は面白いです。',
+  correctAnswer: 'Japanese culture is interesting.',
+  explanation: '「日本の文化」 means "Japanese culture."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「の」 in a sentence.',
+  options: [
+    '私の猫がいます。',
+    '私がの猫がいます。',
+    '私のが猫がいます。',
+    '私が猫のいます。'
+  ],
+  correctAnswer: '私の猫がいます。',
+  explanation: '「私の猫」 correctly uses 「の」 to indicate possession.'
+}
     ],
     difficulty: 4,
     estimatedStudyTime: 15
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 9,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -443,13 +607,31 @@ const RAW_LESSONS = [
         question: 'Translate: 彼はコーヒーを飲みません。',
         correctAnswer: 'He does not drink coffee.',
         explanation: '「飲みません」 means "does not drink."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 9
+{
+  type: 'multiple-choice',
+  question: 'What is the polite negative form of 飲む?',
+  options: ['飲みません', '飲まない', '飲みます', '飲みませんでした'],
+  correctAnswer: '飲みません',
+  explanation: 'The polite negative form of 飲む is 飲みません.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 彼はコーヒーを飲みません。',
+  correctAnswer: 'He does not drink coffee.',
+  explanation: '「飲みません」 means "does not drink."'
+},
+{
+  type: 'conjugation',
+  question: 'Conjugate 食べます (tabemasu) into polite negative past tense.',
+  correctAnswer: '食べませんでした',
+  explanation: 'Remove 「ます」 and add 「ませんでした」 to form the polite negative past tense.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 10,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -491,13 +673,37 @@ const RAW_LESSONS = [
         question: 'Translate: 公園で遊びます。',
         correctAnswer: 'Play at the park.',
         explanation: '「公園で」 means "at the park."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 10
+{
+  type: 'multiple-choice',
+  question: 'What does 「で」 indicate?',
+  options: ['Location of existence', 'Means of action', 'Context of an action', 'All of the above'],
+  correctAnswer: 'All of the above',
+  explanation: '「で」 indicates location of action, means, or context.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 公園で遊びます。',
+  correctAnswer: 'Play at the park.',
+  explanation: '「公園で」 means "at the park."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「で」 in a sentence.',
+  options: [
+    '図書館で本を読みます。',
+    '図書館に本を読みます。',
+    '図書館が本を読みます。',
+    '図書館の本を読みます。'
+  ],
+  correctAnswer: '図書館で本を読みます。',
+  explanation: '「図書館で」 correctly uses 「で」 to indicate the location of the action.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 11,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -537,13 +743,37 @@ const RAW_LESSONS = [
         question: 'Translate: 毎朝6時に走ります。',
         correctAnswer: 'I run every morning at 6 o’clock.',
         explanation: '「毎朝6時に」 means "every morning at 6 o’clock."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 11
+{
+  type: 'multiple-choice',
+  question: 'Which particle is used to indicate a specific time?',
+  options: ['で', 'に', 'を', 'へ'],
+  correctAnswer: 'に',
+  explanation: '「に」 is used for specific times.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 毎朝6時に走ります。',
+  correctAnswer: 'I run every morning at 6 o’clock.',
+  explanation: '「毎朝6時に」 means "every morning at 6 o’clock."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「に」 for time in a sentence.',
+  options: [
+    '午後3時に会いましょう。',
+    '午後3時で会いましょう。',
+    '午後3時を会いましょう。',
+    '午後3時へ会いましょう。'
+  ],
+  correctAnswer: '午後3時に会いましょう。',
+  explanation: '「午後3時に」 correctly uses 「に」 to indicate a specific time.'
+}
     ],
     difficulty: 4,
     estimatedStudyTime: 15
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 12,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -587,13 +817,32 @@ const RAW_LESSONS = [
         question: 'Translate: 猫が五匹います。',
         correctAnswer: 'There are five cats.',
         explanation: '「匹」 is the counter for small animals.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 12
+{
+  type: 'multiple-choice',
+  question: 'What is the counter for small animals?',
+  options: ['つ', '人', '枚', '匹'],
+  correctAnswer: '匹',
+  explanation: '「匹」 is the counter for small animals.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 猫が五匹います。',
+  correctAnswer: 'There are five cats.',
+  explanation: '「匹」 is the counter for small animals like cats.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Which counter is used for books?',
+  options: ['冊', '個', '本', '匹'],
+  correctAnswer: '冊',
+  explanation: '「冊」 is used as the counter for books.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 25
-  });
-  
-  RAW_LESSONS.push({
+  },{
     id: 13,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -633,13 +882,37 @@ const RAW_LESSONS = [
         question: 'Translate: 雨だから、傘を持ってきました。',
         correctAnswer: 'It’s raining, so I brought an umbrella.',
         explanation: '「雨だから」 explains the reason for bringing an umbrella.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 13
+{
+  type: 'multiple-choice',
+  question: 'Which particle is used to indicate a reason?',
+  options: ['から', 'で', 'に', 'が'],
+  correctAnswer: 'から',
+  explanation: '「から」 is used to indicate a reason or cause.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 雨だから、傘を持ってきました。',
+  correctAnswer: 'It’s raining, so I brought an umbrella.',
+  explanation: '「雨だから」 explains the reason for bringing an umbrella.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「から」 to express reason.',
+  options: [
+    '疲れたから、早く寝ます。',
+    '疲れたで、早く寝ます。',
+    '疲れたに、早く寝ます。',
+    '疲れたが、早く寝ます。'
+  ],
+  correctAnswer: '疲れたから、早く寝ます。',
+  explanation: '「疲れたから」 correctly uses 「から」 to indicate the reason.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 14,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -679,13 +952,37 @@ const RAW_LESSONS = [
         question: 'Translate: 誰が来ましたか？',
         correctAnswer: 'Who came?',
         explanation: '「誰が」 emphasizes "who" as the subject of the question.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 14
+{
+  type: 'multiple-choice',
+  question: 'What does 「が」 emphasize?',
+  options: ['The topic', 'The subject', 'The object', 'The location'],
+  correctAnswer: 'The subject',
+  explanation: '「が」 emphasizes or identifies the subject of the sentence.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 誰が来ましたか？',
+  correctAnswer: 'Who came?',
+  explanation: '「誰が」 emphasizes "who" as the subject of the question.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「が」 in a sentence.',
+  options: [
+    '猫が好きです。',
+    '猫は好きです。',
+    '猫に好きです。',
+    '猫を好きです。'
+  ],
+  correctAnswer: '猫が好きです。',
+  explanation: '「が」 is used to mark the subject in this sentence.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 15,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -725,13 +1022,37 @@ const RAW_LESSONS = [
         question: 'Translate: 本を読んでください。',
         correctAnswer: 'Please read the book.',
         explanation: '「読んで」 is the 〜て form of 読む, followed by 「ください」 for a polite request.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 15
+{
+  type: 'multiple-choice',
+  question: 'What form does a verb take before 「ください」?',
+  options: ['Plain form', 'Negative form', '〜て form', 'Past form'],
+  correctAnswer: '〜て form',
+  explanation: 'The 〜て form is used before 「ください」 to make polite requests.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 本を読んでください。',
+  correctAnswer: 'Please read the book.',
+  explanation: '「読んで」 is the 〜て form of 読む, followed by 「ください」 for a polite request.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜ください」 in a sentence.',
+  options: [
+    '窓を閉めてください。',
+    '窓を閉めてくださいる。',
+    '窓を閉めください。',
+    '窓を閉めてくださいます。'
+  ],
+  correctAnswer: '窓を閉めてください。',
+  explanation: '「閉めてください」 correctly uses the 〜て form followed by 「ください」.'
+}
     ],
     difficulty: 4,
     estimatedStudyTime: 15
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 16,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -771,13 +1092,37 @@ const RAW_LESSONS = [
         question: 'Translate: 音楽を聴くことができます。',
         correctAnswer: 'I can listen to music.',
         explanation: '「聴くことができます」 means "can listen."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 16
+{
+  type: 'multiple-choice',
+  question: 'What does 「ことができる」 mean?',
+  options: ['Cannot do', 'Want to do', 'Can do', 'Must do'],
+  correctAnswer: 'Can do',
+  explanation: '「ことができる」 expresses the ability to do something.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 音楽を聴くことができます。',
+  correctAnswer: 'I can listen to music.',
+  explanation: '「聴くことができます」 means "can listen."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜ことができる」 in a sentence.',
+  options: [
+    '日本語を話すことができます。',
+    '日本語を話すことができ。',
+    '日本語を話すことができる。',
+    '日本語を話すことできる。'
+  ],
+  correctAnswer: '日本語を話すことができます。',
+  explanation: '「ことができます」 correctly expresses the ability to speak Japanese.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 17,
     level: 'N5',
     jlptLevel: 'Beginner',
@@ -817,13 +1162,37 @@ const RAW_LESSONS = [
         question: 'Translate: 本を読みたいです。',
         correctAnswer: 'I want to read a book.',
         explanation: '「読みたい」 means "want to read."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 17
+{
+  type: 'multiple-choice',
+  question: 'How do you express desire with 「〜たい」?',
+  options: ['Attach it to the plain form', 'Attach it to the stem of the verb', 'Use it as a particle'],
+  correctAnswer: 'Attach it to the stem of the verb',
+  explanation: '「〜たい」 is attached to the stem of the verb to express desire.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 本を読みたいです。',
+  correctAnswer: 'I want to read a book.',
+  explanation: '「読みたい」 means "want to read."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜たい」 in a sentence.',
+  options: [
+    '食べるたいです。',
+    '食べたいです。',
+    '食べたい。',
+    '食べたいる。'
+  ],
+  correctAnswer: '食べたいです。',
+  explanation: '「食べたいです」 correctly attaches 「たい」 to the verb stem.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 18,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -863,13 +1232,31 @@ const RAW_LESSONS = [
         question: 'Translate: 宿題をしなければならない。',
         correctAnswer: 'I must do my homework.',
         explanation: '「〜なければならない」 indicates that doing homework is a must.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 18
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜なければならない」 express?',
+  options: ['Desire', 'Prohibition', 'Obligation', 'Permission'],
+  correctAnswer: 'Obligation',
+  explanation: '「〜なければならない」 expresses obligation or "must do."'
+},
+{
+  type: 'translation',
+  question: 'Translate: 宿題をしなければならない。',
+  correctAnswer: 'I must do my homework.',
+  explanation: '「〜なければならない」 indicates that doing homework is a must.'
+},
+{
+  type: 'conjugation',
+  question: 'Conjugate 行く into 「〜なければならない」 form.',
+  correctAnswer: '行かなければならない',
+  explanation: 'Use the negative stem and add 「なければならない」.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 19,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -909,13 +1296,37 @@ const RAW_LESSONS = [
         question: 'Translate: 嘘をついてはいけない。',
         correctAnswer: 'You must not lie.',
         explanation: '「〜てはいけない」 is used to prohibit lying.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 19
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜てはいけない」 express?',
+  options: ['Permission', 'Prohibition', 'Obligation', 'Possibility'],
+  correctAnswer: 'Prohibition',
+  explanation: '「〜てはいけない」 expresses prohibition or "must not do."'
+},
+{
+  type: 'translation',
+  question: 'Translate: 嘘をついてはいけない。',
+  correctAnswer: 'You must not lie.',
+  explanation: '「〜てはいけない」 is used to prohibit lying.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜てはいけない」 in a sentence.',
+  options: [
+    'この部屋に入ってはいけない。',
+    'この部屋に入ってもいい。',
+    'この部屋に入ってもいいです。',
+    'この部屋に入ってはよい。'
+  ],
+  correctAnswer: 'この部屋に入ってはいけない。',
+  explanation: '「入ってはいけない」 correctly expresses prohibition.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 20,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -955,14 +1366,37 @@ const RAW_LESSONS = [
         question: 'Translate: ドアを閉めてもいいです。',
         correctAnswer: 'You may close the door.',
         explanation: '「〜てもいい」 indicates that closing the door is allowed.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 20
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜てもいい」 express?',
+  options: ['Prohibition', 'Permission', 'Obligation', 'Desire'],
+  correctAnswer: 'Permission',
+  explanation: '「〜てもいい」 expresses permission or allowance.'
+},
+{
+  type: 'translation',
+  question: 'Translate: ドアを閉めてもいいです。',
+  correctAnswer: 'You may close the door.',
+  explanation: '「〜てもいい」 indicates that closing the door is allowed.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜てもいい」 in a sentence.',
+  options: [
+    'ここに座ってはいけないですか？',
+    'ここに座ってもいいですか？',
+    'ここに座ってもいいです。',
+    'ここに座ってはいいです。'
+  ],
+  correctAnswer: 'ここに座ってもいいですか？',
+  explanation: '「座ってもいいですか？」 correctly asks for permission.'
+}
     ],
     difficulty: 5,
     estimatedStudyTime: 20
-  });
-
-
-  RAW_LESSONS.push({
+  },{
     id: 21,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1002,13 +1436,32 @@ const RAW_LESSONS = [
         question: 'Translate: 私は漢字が書けます。',
         correctAnswer: 'I can write kanji.',
         explanation: '「書けます」 is the potential form of 書く.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 21
+{
+  type: 'multiple-choice',
+  question: 'What does the potential form express?',
+  options: ['Obligation', 'Possibility', 'Ability', 'Prohibition'],
+  correctAnswer: 'Ability',
+  explanation: 'The potential form expresses the ability to do something.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 私は漢字が書けます。',
+  correctAnswer: 'I can write kanji.',
+  explanation: '「書けます」 is the potential form of 書く.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct potential form of 読む.',
+  options: ['読める', '読まれる', '読むことができる', '読ます'],
+  correctAnswer: '読める',
+  explanation: 'The potential form of 読む is 読める.'
+}
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 22,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1051,13 +1504,37 @@ const RAW_LESSONS = [
         question: 'Translate: 犬より猫が静かです。',
         correctAnswer: 'Cats are quieter than dogs.',
         explanation: '「より」 indicates that dogs are noisier than cats.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 22
+{
+  type: 'multiple-choice',
+  question: 'What does 「より」 indicate?',
+  options: ['Greater than', 'Less than', 'Equal to', 'None of the above'],
+  correctAnswer: 'Less than',
+  explanation: '「より」 is used to indicate something is less than another.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 犬より猫が静かです。',
+  correctAnswer: 'Cats are quieter than dogs.',
+  explanation: '「より」 indicates that dogs are noisier than cats.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「のほうが」 in a sentence.',
+  options: [
+    '日本のほうがアメリカより大きいです。',
+    '日本よりほうがアメリカ大きいです。',
+    '日本のほうがアメリカより大きいです。',
+    '日本のほうがアメリカ大きいです。'
+  ],
+  correctAnswer: '日本のほうがアメリカより大きいです。',
+  explanation: '「のほうが」 emphasizes that Japan is bigger than America.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 23,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1097,13 +1574,37 @@ const RAW_LESSONS = [
         question: 'Translate: 彼は来ないそうです。',
         correctAnswer: 'I heard he isn’t coming.',
         explanation: '「来ないそうです」 means "I heard he isn’t coming."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 23
+{
+  type: 'multiple-choice',
+  question: 'What does 「そうだ」 indicate?',
+  options: ['Desire', 'Hearsay', 'Ability', 'Prohibition'],
+  correctAnswer: 'Hearsay',
+  explanation: '「そうだ」 indicates something you have heard or reported information.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 彼は来ないそうです。',
+  correctAnswer: 'I heard he isn’t coming.',
+  explanation: '「来ないそうです」 means "I heard he isn’t coming."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「そうだ」 in a sentence.',
+  options: [
+    '明日は雨が降るそうだ。',
+    '明日は雨が降るがだ。',
+    '明日は雨が降るにだ。',
+    '明日は雨が降るをだ。'
+  ],
+  correctAnswer: '明日は雨が降るそうだ。',
+  explanation: '「そうだ」 correctly follows the plain form of the verb to indicate hearsay.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 24,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1143,14 +1644,37 @@ const RAW_LESSONS = [
         question: 'Translate: 明日は寒いでしょう。',
         correctAnswer: 'It will probably be cold tomorrow.',
         explanation: '「寒いでしょう」 expresses a conjecture about the weather.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 24
+{
+  type: 'multiple-choice',
+  question: 'What does 「でしょう」 express?',
+  options: ['Certainty', 'Possibility', 'Conjecture', 'Prohibition'],
+  correctAnswer: 'Conjecture',
+  explanation: '「でしょう」 is used to express conjecture or likelihood.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 明日は寒いでしょう。',
+  correctAnswer: 'It will probably be cold tomorrow.',
+  explanation: '「寒いでしょう」 expresses a conjecture about the weather.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「でしょう」 in a sentence.',
+  options: [
+    '彼は学生でしょう。',
+    '彼は学生だでしょう。',
+    '彼は学生ですでしょう。',
+    '彼は学生でしょうか。'
+  ],
+  correctAnswer: '彼は学生でしょう。',
+  explanation: '「でしょう」 correctly follows the noun to express conjecture.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-
-  RAW_LESSONS.push({
+  },{
     id: 25,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1175,7 +1699,33 @@ const RAW_LESSONS = [
         japanese: 'スマホを見ながら歩かないでください。',
         romanji: 'Sumaho o minagara arukanaide kudasai.',
         english: 'Please don’t walk while looking at your phone.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 25
+{
+  type: 'multiple-choice',
+  question: 'What does 「ながら」 express?',
+  options: ['Past actions', 'Simultaneous actions', 'Desire', 'Permission'],
+  correctAnswer: 'Simultaneous actions',
+  explanation: '「ながら」 describes two actions happening at the same time.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 本を読みながらコーヒーを飲みます。',
+  correctAnswer: 'I drink coffee while reading a book.',
+  explanation: '「読みながら」 means "while reading."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「ながら」 in a sentence.',
+  options: [
+    '音楽を聞きながら勉強します。',
+    '音楽を聞きながらも勉強します。',
+    '音楽を聞きながらして勉強します。',
+    '音楽を聞きながらは勉強します。'
+  ],
+  correctAnswer: '音楽を聞きながら勉強します。',
+  explanation: '「聞きながら」 correctly uses 「ながら」 to indicate simultaneous actions.'
+}
     ],
     quiz: [
       {
@@ -1194,9 +1744,7 @@ const RAW_LESSONS = [
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 26,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1237,13 +1785,37 @@ const RAW_LESSONS = [
         question: 'Translate: 学校から家まで自転車で行きます。',
         correctAnswer: 'I go from school to home by bicycle.',
         explanation: '「から」 indicates the starting point, and 「まで」 indicates the endpoint.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 26
+{
+  type: 'multiple-choice',
+  question: 'What does 「から」 indicate?',
+  options: ['Ending point', 'Starting point', 'Range', 'Direction'],
+  correctAnswer: 'Starting point',
+  explanation: '「から」 is used to indicate the starting point of a range.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 学校から家まで自転車で行きます。',
+  correctAnswer: 'I go from school to home by bicycle.',
+  explanation: '「から」 indicates the starting point, and 「まで」 indicates the endpoint.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「まで」 in a sentence.',
+  options: [
+    '朝まで働きます。',
+    '朝から働きます。',
+    '朝で働きます。',
+    '朝に働きます。'
+  ],
+  correctAnswer: '朝まで働きます。',
+  explanation: '「朝まで」 correctly uses 「まで」 to indicate the ending point.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 27,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1283,13 +1855,37 @@ const RAW_LESSONS = [
         question: 'Translate: 週ごとに会議があります。',
         correctAnswer: 'There is a meeting every week.',
         explanation: '「週ごとに」 means "every week."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 27
+{
+  type: 'multiple-choice',
+  question: 'What does 「ごとに」 mean?',
+  options: ['Always', 'Every', 'Sometimes', 'Never'],
+  correctAnswer: 'Every',
+  explanation: '「ごとに」 expresses intervals or frequency.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 週ごとに会議があります。',
+  correctAnswer: 'There is a meeting every week.',
+  explanation: '「週ごとに」 means "every week."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「ごとに」 in a sentence.',
+  options: [
+    '1日ごとに運動します。',
+    '1日ごに運動します。',
+    '1日ごまで運動します。',
+    '1日ごへ運動します。'
+  ],
+  correctAnswer: '1日ごとに運動します。',
+  explanation: '「ごとに」 correctly expresses "every day."'
+}
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 28,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1329,13 +1925,37 @@ const RAW_LESSONS = [
         question: 'Translate: 部屋を掃除しておきました。',
         correctAnswer: 'I cleaned the room in advance.',
         explanation: '「掃除しておきました」 means "cleaned in advance."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 28
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜ておく」 express?',
+  options: ['Obligation', 'Preparation', 'Permission', 'Regret'],
+  correctAnswer: 'Preparation',
+  explanation: '「〜ておく」 indicates an action done in preparation for the future.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 部屋を掃除しておきました。',
+  correctAnswer: 'I cleaned the room in advance.',
+  explanation: '「掃除しておきました」 means "cleaned in advance."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜ておく」 in a sentence.',
+  options: [
+    'ノートにメモを取っておいてください。',
+    'ノートにメモを取っておいてます。',
+    'ノートにメモを取っておきます。',
+    'ノートにメモを取っておいてる。'
+  ],
+  correctAnswer: 'ノートにメモを取っておいてください。',
+  explanation: '「取っておいてください」 correctly uses 「〜ておく」 to make a polite request for preparation.'
+}
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 29,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1375,13 +1995,37 @@ const RAW_LESSONS = [
         question: 'Translate: 明日勉強するつもりです。',
         correctAnswer: 'I plan to study tomorrow.',
         explanation: '「勉強するつもり」 means "plan to study."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 29
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜つもり」 express?',
+  options: ['Past actions', 'Intention', 'Possibility', 'Prohibition'],
+  correctAnswer: 'Intention',
+  explanation: '「〜つもり」 expresses intention or plans.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 明日勉強するつもりです。',
+  correctAnswer: 'I plan to study tomorrow.',
+  explanation: '「勉強するつもり」 means "plan to study."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜つもり」 in a sentence.',
+  options: [
+    '来週、新しい仕事を始めるつもりです。',
+    '来週、新しい仕事を始めることつもりです。',
+    '来週、新しい仕事を始めるつもりるです。',
+    '来週、新しい仕事を始めるますつもりです。'
+  ],
+  correctAnswer: '来週、新しい仕事を始めるつもりです。',
+  explanation: '「始めるつもりです」 correctly expresses the intention to start a new job.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 30,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1421,13 +2065,37 @@ const RAW_LESSONS = [
         question: 'Translate: 遅く寝ないほうがいい。',
         correctAnswer: 'You shouldn’t sleep late.',
         explanation: '「寝ないほうがいい」 means "shouldn’t sleep late."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 30
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜たほうがいい」 express?',
+  options: ['Possibility', 'Prohibition', 'Suggestion', 'Intention'],
+  correctAnswer: 'Suggestion',
+  explanation: '「〜たほうがいい」 is used to suggest or give advice.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 遅く寝ないほうがいい。',
+  correctAnswer: 'You shouldn’t sleep late.',
+  explanation: '「寝ないほうがいい」 means "shouldn’t sleep late."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜たほうがいい」 in a sentence.',
+  options: [
+    'もっと野菜を食べたほうがいいです。',
+    'もっと野菜を食べたいいです。',
+    'もっと野菜を食べたほういいです。',
+    'もっと野菜を食べたほうがいい。'
+  ],
+  correctAnswer: 'もっと野菜を食べたほうがいいです。',
+  explanation: '「食べたほうがいいです」 correctly uses 「〜たほうがいい」 to suggest eating more vegetables.'
+}
     ],
     difficulty: 6,
     estimatedStudyTime: 20
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 31,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1467,13 +2135,37 @@ const RAW_LESSONS = [
         question: 'Translate: 彼は忙しいかもしれません。',
         correctAnswer: 'He might be busy.',
         explanation: '「忙しいかもしれません」 means "might be busy."'
-      }
+      },
+      // Additional Quiz Questions for Lesson 31
+{
+  type: 'multiple-choice',
+  question: 'What does 「〜かもしれない」 express?',
+  options: ['Possibility', 'Certainty', 'Intention', 'Prohibition'],
+  correctAnswer: 'Possibility',
+  explanation: '「〜かもしれない」 is used to express possibility or uncertainty.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 彼は忙しいかもしれません。',
+  correctAnswer: 'He might be busy.',
+  explanation: '「忙しいかもしれません」 means "might be busy."'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「〜かもしれない」 in a sentence.',
+  options: [
+    '明日は雨が降るかもしれない。',
+    '明日は雨が降るかもしれないです。',
+    '明日は雨が降るかもしれます。',
+    '明日は雨が降るかもしれないる。'
+  ],
+  correctAnswer: '明日は雨が降るかもしれない。',
+  explanation: '「降るかもしれない」 correctly expresses the possibility of rain.'
+}
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
-
-  RAW_LESSONS.push({
+  },{
     id: 32,
     level: 'N4',
     jlptLevel: 'Lower Intermediate',
@@ -1513,12 +2205,67 @@ const RAW_LESSONS = [
         question: 'Translate: 学校が休みなので、家にいます。',
         correctAnswer: 'Since school is closed, I’m at home.',
         explanation: '「休みなので」 explains the reason for being at home.'
-      }
+      },
+      // Additional Quiz Questions for Lesson 32
+{
+  type: 'multiple-choice',
+  question: 'What does 「ので」 express?',
+  options: ['Reason', 'Prohibition', 'Suggestion', 'Possibility'],
+  correctAnswer: 'Reason',
+  explanation: '「ので」 is used to explain reasons in a softer tone.'
+},
+{
+  type: 'translation',
+  question: 'Translate: 学校が休みなので、家にいます。',
+  correctAnswer: 'Since school is closed, I’m at home.',
+  explanation: '「休みなので」 explains the reason for being at home.'
+},
+{
+  type: 'multiple-choice',
+  question: 'Choose the correct usage of 「ので」 in a sentence.',
+  options: [
+    '急いでいるので、先に行きます。',
+    '急いでいるから、先に行きます。',
+    '急いでいるに、先に行きます。',
+    '急いでいるが、先に行きます。'
+  ],
+  correctAnswer: '急いでいるので、先に行きます。',
+  explanation: '「急いでいるので」 correctly uses 「ので」 to indicate the reason.'
+}
     ],
     difficulty: 7,
     estimatedStudyTime: 25
-  });
+  }];
+  
+    
+    
+    
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
 
 /**
  * We create a mutable copy of RAW_LESSONS,
@@ -1531,6 +2278,20 @@ RAW_LESSONS.forEach((lesson) => {
     // If the question doesn't have an `id`, assign a new unique one
     if (!q.id) {
       q.id = 'Q' + questionIdCounter++;
+    }
+  });
+});
+
+RAW_LESSONS.forEach((lesson) => {
+  if (!lesson.quiz) return;
+  lesson.quiz.forEach((q) => {
+    // If the question doesn't have an `id`, assign a new unique one
+    if (!q.id) {
+      q.id = 'Q' + questionIdCounter++;
+    }
+    // Make sure each question knows which lesson it belongs to:
+    if (!q.lessonId) {
+      q.lessonId = lesson.id;
     }
   });
 });
