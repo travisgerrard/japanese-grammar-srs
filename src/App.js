@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import './index.css';
 import ThemeToggle from './components/ThemeToggle';
@@ -8,8 +8,10 @@ import ThemeToggle from './components/ThemeToggle';
 import { GRAMMAR_LESSONS, QUESTION_BANK } from './lessons';
 
 /* ===========================
-   2) UI BASICS
+   UI COMPONENTS
 =========================== */
+
+// Button Component
 const Button = ({ children, variant = 'default', className = '', ...props }) => {
   const baseClasses =
     'px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200';
@@ -32,6 +34,7 @@ const Button = ({ children, variant = 'default', className = '', ...props }) => 
   );
 };
 
+// Card Component
 const Card = ({ children, className = '', ...props }) => (
   <div
     className={`border border-gray-300 dark:border-gray-700 rounded p-4 bg-white dark:bg-gray-800 ${className}`}
@@ -41,18 +44,21 @@ const Card = ({ children, className = '', ...props }) => (
   </div>
 );
 
+// CardHeader Component
 const CardHeader = ({ children, className = '', ...props }) => (
   <div className={`mb-4 text-gray-900 dark:text-gray-100 ${className}`} {...props}>
     {children}
   </div>
 );
 
+// CardContent Component
 const CardContent = ({ children, className = '', ...props }) => (
   <div className={`text-gray-800 dark:text-gray-200 ${className}`} {...props}>
     {children}
   </div>
 );
 
+// Progress Component
 const Progress = ({ value = 0, className = '' }) => (
   <div className={`w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 ${className}`}>
     <div
@@ -63,7 +69,7 @@ const Progress = ({ value = 0, className = '' }) => (
 );
 
 /* ===========================
-   3) LOCALSTORAGE-BASED SRS LOGIC
+   LOCALSTORAGE-BASED SRS LOGIC
 =========================== */
 const SRS_STORAGE_KEY = 'japaneseSRSData';
 
@@ -162,7 +168,7 @@ function getMistakesQuestions() {
 }
 
 /* ===========================
-   4) FUZZY MATCH FOR TYPED ANSWERS
+   FUZZY MATCH FOR TYPED ANSWERS
 =========================== */
 function levenshteinDistance(a, b) {
   const dp = [];
@@ -195,7 +201,7 @@ function fuzzyMatch(userAnswer, correctAnswer) {
 }
 
 /* ===========================
-   5) OPTIONAL LESSON REFRESHER
+   OPTIONAL LESSON REFRESHER
    Show snippet if user is wrong
 =========================== */
 function LessonRefresher({ lessonId }) {
@@ -217,7 +223,7 @@ function LessonRefresher({ lessonId }) {
 }
 
 /* ===========================
-   6) LESSON-BASED QUIZ
+   LESSON-BASED QUIZ
 =========================== */
 const LessonQuiz = ({ lesson, onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -348,12 +354,13 @@ const LessonQuiz = ({ lesson, onComplete }) => {
 };
 
 /* ===========================
-   7) LESSON DETAIL
+   LESSON DETAIL
 =========================== */
 function GrammarLessonDetail({ lesson }) {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
+  const { scheduleReview } = useSpacedRepetition();
 
   // If the user switches lessons
   useEffect(() => {
@@ -363,6 +370,7 @@ function GrammarLessonDetail({ lesson }) {
   }, [lesson]);
 
   function handleQuizComplete(score) {
+    scheduleReview(lesson.id);
     setShowQuiz(false);
     setQuizCompleted(true);
     setFinalScore(score);
@@ -425,8 +433,29 @@ function GrammarLessonDetail({ lesson }) {
 }
 
 /* ===========================
-   8) SRS QUIZ
-   (New, Review, or Mistakes)
+   SPACED REPETITION HOOK
+=========================== */
+const useSpacedRepetition = () => {
+  const [reviewSchedule, setReviewSchedule] = useState({});
+
+  const scheduleReview = useCallback((lessonId) => {
+    const now = new Date();
+    const intervals = [1, 3, 7, 16, 35]; // Review intervals in days
+    
+    setReviewSchedule(prev => ({
+      ...prev,
+      [lessonId]: {
+        lastReviewed: now,
+        nextReview: new Date(now.setDate(now.getDate() + intervals[0]))
+      }
+    }));
+  }, []);
+
+  return { scheduleReview, reviewSchedule };
+};
+
+/* ===========================
+   SRS QUIZ COMPONENT
 =========================== */
 function SRSQuiz({ title, questions, onDone }) {
   const [index, setIndex] = useState(0);
@@ -557,9 +586,9 @@ function SRSQuiz({ title, questions, onDone }) {
 }
 
 /* ===========================
-   9) MAIN APP
+   MAIN APP COMPONENT
 =========================== */
-function App() {
+function JapaneseGrammarApp() {
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -597,6 +626,42 @@ function App() {
     setShowSrsResults(true);
   }
 
+  // Function to close sidebar when clicking outside
+  const handleOutsideClick = useCallback(
+    (e) => {
+      if (
+        isSidebarOpen &&
+        !e.target.closest('#sidebar') &&
+        !e.target.closest('#menu-button')
+      ) {
+        setIsSidebarOpen(false);
+      }
+    },
+    [isSidebarOpen]
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [handleOutsideClick]);
+
+  // Handle escape key to close sidebar
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isSidebarOpen) {
+        setIsSidebarOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    // Cleanup
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isSidebarOpen]);
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Top Nav (mobile only) */}
@@ -604,7 +669,11 @@ function App() {
         <h1 className="text-2xl font-bold">日本語 Grammar Mastery</h1>
         <ThemeToggle />
         <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          id="menu-button"
+          onClick={() => {
+            console.log('Hamburger menu clicked'); // Debugging
+            setIsSidebarOpen(!isSidebarOpen);
+          }}
           className="focus:outline-none text-white ml-2"
           aria-label="Toggle Sidebar"
         >
@@ -621,17 +690,28 @@ function App() {
         </button>
       </div>
 
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-10 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* Sidebar */}
       <div
+        id="sidebar"
         className={`
           bg-gray-100 dark:bg-gray-800 p-4 md:w-1/4 border-r border-gray-300 dark:border-gray-700 
-          ${isSidebarOpen ? 'block' : 'hidden'} 
-          absolute md:relative top-0 left-0 w-full md:w-1/4 h-full md:h-auto
-          z-10
-          hidden md:block
+          fixed md:relative top-0 left-0 w-3/4 sm:w-2/3 md:w-1/4 h-full md:h-auto
+          z-20
+          transform transition-transform duration-300 ease-in-out
+          overflow-y-auto
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:translate-x-0
         `}
       >
-        {/* Close button (mobile) */}
+        {/* Close button (visible only on small screens) */}
         <div className="flex justify-between items-center mb-4 md:hidden">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Menu</h2>
           <button onClick={() => setIsSidebarOpen(false)} className="focus:outline-none">
@@ -657,6 +737,7 @@ function App() {
               selectedLesson?.id === lesson.id ? 'bg-blue-200 dark:bg-blue-700 border-blue-600 dark:border-blue-800' : ''
             }`}
             onClick={() => {
+              console.log(`Lesson "${lesson.title}" selected`); // Debugging
               setSelectedLesson(lesson);
               setIsSidebarOpen(false);
               setSrsMode('none');
@@ -676,6 +757,7 @@ function App() {
             srsMode === 'new' ? 'bg-blue-200 dark:bg-blue-700' : ''
           }`}
           onClick={() => {
+            console.log('SRS Mode: New Questions'); // Debugging
             setSrsMode('new');
             setSelectedLesson(null);
             setIsSidebarOpen(false);
@@ -689,6 +771,7 @@ function App() {
             srsMode === 'review' ? 'bg-blue-200 dark:bg-blue-700' : ''
           }`}
           onClick={() => {
+            console.log('SRS Mode: Review'); // Debugging
             setSrsMode('review');
             setSelectedLesson(null);
             setIsSidebarOpen(false);
@@ -702,6 +785,7 @@ function App() {
             srsMode === 'mistakes' ? 'bg-blue-200 dark:bg-blue-700' : ''
           }`}
           onClick={() => {
+            console.log('SRS Mode: Mistakes'); // Debugging
             setSrsMode('mistakes');
             setSelectedLesson(null);
             setIsSidebarOpen(false);
@@ -761,20 +845,20 @@ function App() {
   );
 }
 
-/* ===========================
-   HELPER FUNCTION
+  /* ===========================
+     HELPER FUNCTION
 =========================== */
-function getSrsTitle(mode) {
-  switch (mode) {
-    case 'new':
-      return 'New Questions';
-    case 'review':
-      return 'Review';
-    case 'mistakes':
-      return 'Mistakes (Last 24h)';
-    default:
-      return '';
+  function getSrsTitle(mode) {
+    switch (mode) {
+      case 'new':
+        return 'New Questions';
+      case 'review':
+        return 'Review';
+      case 'mistakes':
+        return 'Mistakes (Last 24h)';
+      default:
+        return '';
+    }
   }
-}
 
-export default App;
+  export default JapaneseGrammarApp;
