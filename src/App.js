@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import './index.css';
+
 import ThemeToggle from './components/ThemeToggle';
 
 // Import the lessons and the global question bank
@@ -227,129 +228,116 @@ function LessonRefresher({ lessonId }) {
 =========================== */
 const LessonQuiz = ({ lesson, onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
   const [score, setScore] = useState(0);
-  const [showExplanation, setShowExplanation] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answeredCorrectly, setAnsweredCorrectly] = useState(null);
+  const [showExplanation, setShowExplanation] = useState(false);
 
-  // Reset if lesson changes
-  useEffect(() => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswer('');
-    setScore(0);
-    setShowExplanation(false);
-    setAnsweredCorrectly(null);
-  }, [lesson]);
+  const currentQuestion = lesson.quiz[currentQuestionIndex];
 
-  const currentQuestion = lesson?.quiz?.[currentQuestionIndex];
-  if (!currentQuestion) {
-    return <p className="mt-4 text-gray-700 dark:text-gray-300">No questions available.</p>;
-  }
+  const handleAnswerSelect = (answer) => {
+    setSelectedAnswer(answer);
+  };
 
-  function submitAnswer() {
-    if (answeredCorrectly !== null) return; // already answered
+  const submitAnswer = () => {
+    if (answeredCorrectly !== null) return; // Prevent multiple submissions
 
-    let isCorrect = false;
+    let isCorrect;
+
     if (currentQuestion.type === 'multiple-choice') {
       isCorrect =
-        selectedAnswer.toLowerCase().trim() ===
-        currentQuestion.correctAnswer.toLowerCase().trim();
+        selectedAnswer.trim().toLowerCase() ===
+        currentQuestion.correctAnswer.trim().toLowerCase();
     } else {
-      // translation / conjugation => fuzzy
-      isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
+      if (currentQuestion.correctAnswers && Array.isArray(currentQuestion.correctAnswers)) {
+        isCorrect = currentQuestion.correctAnswers.some(ans =>
+          fuzzyMatch(selectedAnswer, ans)
+        );
+      } else if (currentQuestion.correctAnswer) {
+        isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
+      } else {
+        isCorrect = false;
+      }
     }
 
     setAnsweredCorrectly(isCorrect);
     setShowExplanation(true);
     if (isCorrect) {
-      setScore((prev) => prev + 1);
+      setScore(prev => prev + 1);
     }
 
-    // Optionally feed these into SRS
-    if (currentQuestion.id) {
-      updateSRS(currentQuestion.id, isCorrect);
-    }
-  }
+    // Update SRS without changing the question index
+    updateSRS(currentQuestion.id, isCorrect);
+  };
 
-  function goNext() {
-    setAnsweredCorrectly(null);
-    setShowExplanation(false);
-    setSelectedAnswer('');
-    if (currentQuestionIndex >= lesson.quiz.length - 1) {
-      onComplete(score);
+  const handleNext = () => {
+    if (currentQuestionIndex < lesson.quiz.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setSelectedAnswer(null);
+      setAnsweredCorrectly(null);
+      setShowExplanation(false);
     } else {
-      setCurrentQuestionIndex((prev) => prev + 1);
+      onComplete(score);
     }
-  }
-
-  const progressValue = ((currentQuestionIndex + 1) / lesson.quiz.length) * 100;
+  };
 
   return (
-    <Card className="bg-gray-100 dark:bg-gray-800 mt-4">
-      <CardHeader className="text-xl font-bold text-gray-900 dark:text-gray-100">
-        Quiz: {lesson.title}
-      </CardHeader>
-      <CardContent>
-        <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
-          Question {currentQuestionIndex + 1} of {lesson.quiz.length}
-        </p>
-        <Progress value={progressValue} className="mb-4" />
-
-        <p className="font-medium mb-4 text-gray-800 dark:text-gray-200">{currentQuestion.question}</p>
-
-        {/* If multiple-choice */}
+    <div className="p-4 bg-gray-100 rounded">
+      <h3 className="text-xl font-bold mb-4">Quiz: {lesson.title}</h3>
+      <div className="mb-4">
+        <p>{currentQuestion.question}</p>
         {currentQuestion.type === 'multiple-choice' && (
           <div className="grid grid-cols-2 gap-2 mt-2">
-            {currentQuestion.options.map((option) => (
-              <Button
+            {currentQuestion.options.map(option => (
+              <Button 
                 key={option}
                 variant={selectedAnswer === option ? 'default' : 'outline'}
-                onClick={() => setSelectedAnswer(option)}
+                onClick={() => handleAnswerSelect(option)}
               >
                 {option}
               </Button>
             ))}
           </div>
         )}
-
-        {/* If text-based input */}
-        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation') && (
+        {/* Handle other question types like translation */}
+        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation' || currentQuestion.type === 'fill-in-the-blank') && (
           <input
             type="text"
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="w-full border border-gray-300 rounded px-2 py-1 mt-2"
             placeholder="Type your answer..."
-            value={selectedAnswer}
+            value={selectedAnswer || ''}
             onChange={(e) => setSelectedAnswer(e.target.value)}
           />
         )}
-
-        <div className="mt-4 flex gap-2">
-          <Button onClick={submitAnswer} disabled={!selectedAnswer} className="flex-1">
-            Submit Answer
-          </Button>
-          {showExplanation && (
-            <Button variant="outline" onClick={goNext} className="flex-1">
-              {currentQuestionIndex < lesson.quiz.length - 1 ? 'Next' : 'Finish'}
-            </Button>
-          )}
-        </div>
-
-        {showExplanation && (
-          <div className="mt-4 p-3 border rounded bg-white dark:bg-gray-700">
-            {answeredCorrectly ? (
-              <p className="text-green-600 font-semibold">Correct!</p>
-            ) : (
-              <p className="text-red-600 font-semibold">Incorrect</p>
-            )}
-            {currentQuestion.explanation && (
-              <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-wrap">
-                {currentQuestion.explanation}
-              </p>
-            )}
-          </div>
-        )}
-      </CardContent>
-    </Card>
+      </div>
+      <Button 
+        onClick={submitAnswer} 
+        disabled={!selectedAnswer}
+        className="w-full"
+      >
+        Submit Answer
+      </Button>
+      {showExplanation && (
+  <div className="mt-4 p-2 border rounded bg-white">
+    {answeredCorrectly ? (
+      <p className="text-green-600">Correct!</p>
+    ) : (
+      <p className="text-red-600">Incorrect</p>
+    )}
+    <div className="mt-2 text-gray-700 dark:text-gray-300">
+      {currentQuestion.explanation.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ))}
+    </div>
+    <Button onClick={handleNext}>
+      {currentQuestionIndex < lesson.quiz.length - 1 ? 'Next Question' : 'Finish Quiz'}
+    </Button>
+  </div>
+)}
+    </div>
   );
 };
 
@@ -484,8 +472,15 @@ function SRSQuiz({ title, questions, onDone }) {
         selectedAnswer.trim().toLowerCase() ===
         currentQuestion.correctAnswer.trim().toLowerCase();
     } else {
-      // translation/conjugation => fuzzy
-      isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
+      if (currentQuestion.correctAnswers && Array.isArray(currentQuestion.correctAnswers)) {
+        isCorrect = currentQuestion.correctAnswers.some(ans =>
+          fuzzyMatch(selectedAnswer, ans)
+        );
+      } else if (currentQuestion.correctAnswer) {
+        isCorrect = fuzzyMatch(selectedAnswer, currentQuestion.correctAnswer);
+      } else {
+        isCorrect = false;
+      }
     }
 
     setAnsweredCorrectly(isCorrect);
@@ -540,7 +535,7 @@ function SRSQuiz({ title, questions, onDone }) {
         )}
 
         {/* If text-based */}
-        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation') && (
+        {(currentQuestion.type === 'translation' || currentQuestion.type === 'conjugation' || currentQuestion.type === 'fill-in-the-blank') && (
           <input
             type="text"
             className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"

@@ -292,17 +292,26 @@ const RAW_LESSONS = [{
       title: 'Adjectives: i-adjectives and na-adjectives',
       grammarPoints: [
         'i-adjectives: End with い',
-        'na-adjectives: Require な before nouns'
+        'na-adjectives: Require な before nouns',
+        'Negative form of i-adjectives: Remove い and add くない',
+        'Negative form of na-adjectives: Use ではない or じゃない'
       ],
-      explanation: `
-  Adjectives in Japanese are divided into two types:
-  
-  1. i-adjectives: These end with the character い. They can directly modify nouns or form predicates without additional particles.
-     Example: 大きい家 (Ookii ie) - "A big house."
-  
-  2. na-adjectives: These require な when modifying a noun. Without a noun, they function like a state-of-being.
-     Example: 静かな場所 (Shizuka na basho) - "A quiet place."
-      `,
+      explanation: 
+        'Adjectives in Japanese are divided into two types:\n\n' +
+        '1. i-adjectives (い形容詞): These end with the character い. They can directly modify nouns or form predicates without additional particles.\n' +
+        '   Example: 大きい家 (Ookii ie) - "A big house."\n\n' +
+        '   *Negative Form of i-Adjectives:*\n' +
+        '   To make an i-adjective negative, remove the final い and add くない.\n' +
+        '   Example:\n' +
+        '   - 高い (Takai) → 高くない (Takakunai) - "Not tall"\n' +
+        '   - 暑い (Atsui) → 暑くない (Atsukunai) - "Not hot"\n\n' +
+        '2. na-adjectives (な形容詞): These require な when modifying a noun. Without a noun, they function like a state-of-being.\n' +
+        '   Example: 静かな場所 (Shizuka na basho) - "A quiet place."\n\n' +
+        '   *Negative Form of na-Adjectives:*\n' +
+        '   Use ではない or じゃない to form the negative:\n' +
+        '   Example: きれいな部屋 (Kirei na heya) → 部屋はきれいではない / 部屋はきれいじゃない\n' +
+        '   ("The room is not clean/beautiful.")',
+    
       examples: [
         {
           japanese: 'この本は面白いです。',
@@ -310,11 +319,22 @@ const RAW_LESSONS = [{
           english: 'This book is interesting.'
         },
         {
+          japanese: 'この本は面白くないです。',
+          romanji: 'Kono hon wa omoshirokunai desu.',
+          english: 'This book is not interesting.'
+        },
+        {
           japanese: '彼は親切な人です。',
           romanji: 'Kare wa shinsetsu na hito desu.',
           english: 'He is a kind person.'
+        },
+        {
+          japanese: '彼は親切ではない。',
+          romanji: 'Kare wa shinsetsu de wa nai.',
+          english: 'He is not kind.'
         }
       ],
+    
       quiz: [
         {
           type: 'multiple-choice',
@@ -336,71 +356,81 @@ const RAW_LESSONS = [{
           correctAnswer: '大きい家',
           explanation: '大きい家 (Ookii ie) means "A big house." 静か is a na-adjective.'
         },
-        // Additional Quiz Questions for Lesson 5
         {
           type: 'multiple-choice',
-          question: 'Which adjective type requires 「な」 before a noun?',
-          options: ['i-adjectives', 'na-adjectives', 'verb adjectives', 'noun adjectives'],
-          correctAnswer: 'na-adjectives',
-          explanation: 'na-adjectives require 「な」 when modifying nouns.'
+          question: 'How do you make an i-adjective negative?',
+          options: ['Add ではない', 'Remove い and add くない', 'Use じゃない', 'Add です'],
+          correctAnswer: 'Remove い and add くない',
+          explanation: 'To make an i-adjective negative, remove い and add くない.'
         },
         {
           type: 'translation',
-          question: 'Translate: きれいな花',
-          correctAnswer: 'A beautiful flower.',
-          hint: '「きれい」 is a na-adjective meaning "beautiful."'
+          question: 'Translate: このケーキは甘くない。',
+          correctAnswer: 'This cake is not sweet.',
+          explanation: '甘い (Amai) means "sweet"; 甘くない is the negative form ("not sweet").'
         },
         {
           type: 'conjugation',
           question: 'Conjugate 低い (hikui) into its negative form.',
           correctAnswer: '低くない',
           explanation: 'Remove 「い」 and add 「くない」 for the negative form of i-adjectives.'
+        },
+        {
+          type: 'multiple-choice',
+          question: 'Which is the correct negative form of 速い (Hayai, "fast")?',
+          options: ['速いくない', '速くない', '速ではない', '速じゃない'],
+          correctAnswer: '速くない',
+          explanation: 'Remove the final い and add くない to form the negative.'
         }
       ],
+    
       difficulty: 5,
-      estimatedStudyTime: 20
+      estimatedStudyTime: 25
     },{
-    id: 6,
-    level: 'N5',
-    jlptLevel: 'Beginner',
-    title: 'The 「も」 Inclusive Topic Particle',
-    grammarPoints: [
-      '「も」 is used to include or add information to a previously mentioned topic.'
-    ],
-    explanation: `
-  The 「も」 particle replaces 「は」 or 「が」 to add inclusion or emphasize "also" or "too."
-  
-  Example:
-  - 私は学生です。 (Watashi wa gakusei desu.) - I am a student.
-  - 彼も学生です。 (Kare mo gakusei desu.) - He is also a student.
-      `,
-    examples: [
-      {
-        japanese: '猫が好きです。犬も好きです。',
-        romanji: 'Neko ga suki desu. Inu mo suki desu.',
-        english: 'I like cats. I also like dogs.'
-      },
-      {
-        japanese: '私は日本に行きました。彼も行きました。',
-        romanji: 'Watashi wa Nihon ni ikimashita. Kare mo ikimashita.',
-        english: 'I went to Japan. He also went.'
-      }
-    ],
+      id: 6,
+  level: 'N5',
+  jlptLevel: 'Beginner',
+  title: 'The 「も」 Inclusive Topic Particle',
+  grammarPoints: [
+    '「も」 is used to add or include information.',
+    '「も」 can be used twice in a sentence to mean "both... and...".'
+  ],
+  explanation: `
+    The particle 「も」 replaces 「は」 or 「が」 to indicate inclusion, meaning "also" or "too."
+
+    *Basic Usage:*
+      - 私は学生です。(Watashi wa gakusei desu.) → I am a student.
+      - 彼も学生です。(Kare mo gakusei desu.) → He is also a student.
+
+    *Double 「も」 for "Both... and...":*
+      - お茶もコーヒーも好きです。(Ocha mo koohii mo suki desu.) → I like both tea and coffee.
+      - 彼も私も日本語を勉強しています。(Kare mo watashi mo nihongo o benkyou shiteimasu.) → Both he and I are studying Japanese.
+
+    In this structure, 「も」 follows each noun to show that both share the same characteristic.
+  `,
+  examples: [
+    {
+      japanese: '猫が好きです。犬も好きです。',
+      romanji: 'Neko ga suki desu. Inu mo suki desu.',
+      english: 'I like cats. I also like dogs.'
+    },
+    {
+      japanese: '私は日本に行きました。彼も行きました。',
+      romanji: 'Watashi wa Nihon ni ikimashita. Kare mo ikimashita.',
+      english: 'I went to Japan. He also went.'
+    },
+    {
+      japanese: 'お茶もコーヒーも好きです。',
+      romanji: 'Ocha mo koohii mo suki desu.',
+      english: 'I like both tea and coffee.'
+    },
+    {
+      japanese: '彼も私も日本語を勉強しています。',
+      romanji: 'Kare mo watashi mo nihongo o benkyou shiteimasu.',
+      english: 'Both he and I are studying Japanese.'
+    }
+  ],
     quiz: [
-      {
-        type: 'multiple-choice',
-        question: 'Which particle means "also" or "too"?',
-        options: ['も', 'は', 'が', 'を'],
-        correctAnswer: 'も',
-        explanation: '「も」 is used to express inclusion.'
-      },
-      {
-        type: 'translation',
-        question: 'Translate: 彼も学生です。',
-        correctAnswer: 'He is also a student.',
-        explanation: '「も」 indicates inclusion or "also."'
-      },
-      // Additional Quiz Questions for Lesson 6
       {
         type: 'multiple-choice',
         question: 'Which particle means "also" or "too"?',
@@ -425,6 +455,24 @@ const RAW_LESSONS = [{
         ],
         correctAnswer: '私は猫も好きです。',
         explanation: '「猫も」 correctly places 「も」 after the noun to indicate "also."'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'How does 「も」 change the meaning in this sentence: 「田中さんは先生です。鈴木さんも先生です。」?',
+        options: [
+          '鈴木さん is a teacher, but 田中さん is not.',
+          '鈴木さん is also a teacher, like 田中さん.',
+          'も replaces は and means "only."',
+          'The sentence is incorrect.'
+        ],
+        correctAnswer: '鈴木さん is also a teacher, like 田中さん.',
+        explanation: '「も」 replaces 「は」 to indicate that the second person is also a teacher.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: "I like both tea and coffee." (Use 「も」)',
+        correctAnswer: 'お茶もコーヒーも好きです。',
+        explanation: '「も」 can be used in a double structure to mean "both."'
       }
     ],
     difficulty: 4,
@@ -474,25 +522,36 @@ const RAW_LESSONS = [{
         correctAnswer: 'This car is not expensive.',
         explanation: '「高くない」 is the negative form of 高い.'
       },
-      // Additional Quiz Questions for Lesson 7
+      {
+        type: 'conjugation',
+        question: 'Conjugate 低い (hikui) into its past negative form.',
+        correctAnswer: '低くなかった',
+        explanation: 'Remove 「い」, add 「く」, and then attach 「なかった」 to form the past negative.'
+      },
       {
         type: 'multiple-choice',
-        question: 'What is the past form of 高い?',
-        options: ['高かった', '高くない', '高い', '高くなかった'],
-        correctAnswer: '高かった',
-        explanation: 'The past form of 高い is 高かった.'
+        question: 'Which of the following is the correct negative form of 新しい (atarashii, "new")?',
+        options: ['新しくない', '新しなかった', '新しかった', '新しくかった'],
+        correctAnswer: '新しくない',
+        explanation: 'The negative form of i-adjectives follows the pattern: Remove 「い」 and add 「くない」.'
       },
       {
         type: 'translation',
-        question: 'Translate: この車は高くないです。',
-        correctAnswer: 'This car is not expensive.',
-        explanation: '「高くない」 is the negative form of 高い.'
+        question: 'Translate: この本は面白くなかったです。',
+        correctAnswer: 'This book was not interesting.',
+        explanation: '「面白くなかった」 is the past negative form of 面白い (omoshiroi, "interesting").'
       },
       {
-        type: 'conjugation',
-        question: 'Conjugate 低くない (hikukunai) into past negative form.',
-        correctAnswer: '低くなかった',
-        explanation: 'Remove 「ない」 and add 「なかった」 to form the past negative.'
+        type: 'multiple-choice',
+        question: 'Which sentence correctly uses an i-adjective in the past form?',
+        options: [
+          'この映画は面白いです。',
+          '昨日の天気は寒くなかった。',
+          'このケーキは美味しくない。',
+          'この部屋は静かでした。'
+        ],
+        correctAnswer: '昨日の天気は寒くなかった。',
+        explanation: '「寒くなかった」 is the correct past negative form of 寒い (samui, "cold").'
       }
     ],
     difficulty: 5,
@@ -538,62 +597,90 @@ const RAW_LESSONS = [{
         correctAnswer: 'Japanese culture is interesting.',
         explanation: '「日本の文化」 means "Japanese culture."'
       },
-      // Additional Quiz Questions for Lesson 8
-{
-  type: 'multiple-choice',
-  question: 'What does 「の」 indicate?',
-  options: ['Direction', 'Possession', 'Subject', 'Object'],
-  correctAnswer: 'Possession',
-  explanation: '「の」 indicates possession or relationship between nouns.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 日本の文化は面白いです。',
-  correctAnswer: 'Japanese culture is interesting.',
-  explanation: '「日本の文化」 means "Japanese culture."'
-},
-{
-  type: 'multiple-choice',
-  question: 'Choose the correct usage of 「の」 in a sentence.',
-  options: [
-    '私の猫がいます。',
-    '私がの猫がいます。',
-    '私のが猫がいます。',
-    '私が猫のいます。'
-  ],
-  correctAnswer: '私の猫がいます。',
-  explanation: '「私の猫」 correctly uses 「の」 to indicate possession.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'Choose the correct usage of 「の」 in a sentence.',
+        options: [
+          '私の猫がいます。',
+          '私がの猫がいます。',
+          '私のが猫がいます。',
+          '私が猫のいます。'
+        ],
+        correctAnswer: '私の猫がいます。',
+        explanation: '「私の猫」 correctly uses 「の」 to indicate possession.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: これは私の本です。',
+        correctAnswer: 'This is my book.',
+        explanation: '「私の本」 uses 「の」 to show that the book belongs to "me."'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which sentence correctly shows a relationship between two nouns using 「の」?',
+        options: [
+          '東京の大学に行きます。',
+          '東京が大学に行きます。',
+          '東京を大学に行きます。',
+          '東京は大学の行きます。'
+        ],
+        correctAnswer: '東京の大学に行きます。',
+        explanation: '「東京の大学」 means "a university in Tokyo," correctly showing the relationship between the place and the institution.'
+      },
+      {
+        type: 'fill-in-the-blank',
+        question: 'Fill in the blank: 彼は (  ) 先生です。',
+        correctAnswer: '私の',
+        explanation: '「私の先生」 means "my teacher," using 「の」 for possession.'
+      }
     ],
     difficulty: 4,
     estimatedStudyTime: 15
   },{
-    id: 9,
-    level: 'N5',
-    jlptLevel: 'Beginner',
-    title: 'Polite Negative Verbs',
-    grammarPoints: [
-      'Forming polite negative verbs by adding 「ません」.'
-    ],
-    explanation: `
-  To make a verb polite and negative, conjugate it into the negative form by adding 「ません」.
-  
-  Example:
-  - 食べます (tabemasu) - Eat (polite).
-  - 食べません (tabemasen) - Do not eat (polite).
+      id: 9,
+      level: 'N5',
+      jlptLevel: 'Beginner',
+      title: 'Polite Negative Verbs',
+      grammarPoints: [
+        'Forming polite negative verbs by adding 「ません」.',
+        'Forming polite negative past tense verbs by adding 「ませんでした」.'
+      ],
+      explanation: `
+      To make a verb polite and negative, conjugate it into the negative form by adding 「ません」.
+      
+      - 食べます (tabemasu) → 食べません (tabemasen) - Do not eat (polite).
+      - 飲みます (nomimasu) → 飲みません (nomimasen) - Do not drink (polite).
+    
+      To express the **polite negative past tense**, use 「ませんでした」 instead:
+    
+      - 食べませんでした (tabemasen deshita) - Did not eat.
+      - 飲みませんでした (nomimasen deshita) - Did not drink.
+      - 行きませんでした (ikimasen deshita) - Did not go.
+    
+      This form is used to politely say that an action did not happen in the past.
       `,
-    examples: [
-      {
-        japanese: '私はご飯を食べません。',
-        romanji: 'Watashi wa gohan o tabemasen.',
-        english: 'I do not eat rice.'
-      },
-      {
-        japanese: '彼は本を読みません。',
-        romanji: 'Kare wa hon o yomimasen.',
-        english: 'He does not read books.'
-      }
-    ],
+      examples: [
+        {
+          japanese: '私はご飯を食べません。',
+          romanji: 'Watashi wa gohan o tabemasen.',
+          english: 'I do not eat rice.'
+        },
+        {
+          japanese: '彼は本を読みません。',
+          romanji: 'Kare wa hon o yomimasen.',
+          english: 'He does not read books.'
+        },
+        {
+          japanese: '昨日、映画を見ませんでした。',
+          romanji: 'Kinou, eiga o mimasen deshita.',
+          english: 'I did not watch a movie yesterday.'
+        },
+        {
+          japanese: '友達はパーティーに来ませんでした。',
+          romanji: 'Tomodachi wa paatii ni kimasen deshita.',
+          english: 'My friend did not come to the party.'
+        }
+      ],
     quiz: [
       {
         type: 'multiple-choice',
@@ -608,26 +695,25 @@ const RAW_LESSONS = [{
         correctAnswer: 'He does not drink coffee.',
         explanation: '「飲みません」 means "does not drink."'
       },
-      // Additional Quiz Questions for Lesson 9
-{
-  type: 'multiple-choice',
-  question: 'What is the polite negative form of 飲む?',
-  options: ['飲みません', '飲まない', '飲みます', '飲みませんでした'],
-  correctAnswer: '飲みません',
-  explanation: 'The polite negative form of 飲む is 飲みません.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 彼はコーヒーを飲みません。',
-  correctAnswer: 'He does not drink coffee.',
-  explanation: '「飲みません」 means "does not drink."'
-},
-{
-  type: 'conjugation',
-  question: 'Conjugate 食べます (tabemasu) into polite negative past tense.',
-  correctAnswer: '食べませんでした',
-  explanation: 'Remove 「ます」 and add 「ませんでした」 to form the polite negative past tense.'
-}
+      {
+        type: 'conjugation',
+        question: 'Conjugate 食べます (tabemasu) into polite negative past tense.',
+        correctAnswer: '食べませんでした',
+        explanation: 'Remove 「ます」 and add 「ませんでした」 to form the polite negative past tense.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which of the following verbs is correctly conjugated into its polite negative form?',
+        options: ['書きません', '行かません', '話しません', '買いません'],
+        correctAnswer: '話しません',
+        explanation: 'The correct polite negative form of 話す is 話しません. The others contain incorrect conjugation patterns (e.g., 行かません should be 行きません).'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 私は朝ごはんを食べませんでした。',
+        correctAnswer: 'I did not eat breakfast.',
+        explanation: '「食べませんでした」 means "did not eat" in polite past negative form.'
+      }
     ],
     difficulty: 5,
     estimatedStudyTime: 20
@@ -666,40 +752,38 @@ const RAW_LESSONS = [{
         question: 'What does 「で」 indicate?',
         options: ['Location of existence', 'Means of action', 'Context of an action', 'All of the above'],
         correctAnswer: 'All of the above',
-        explanation: '「で」 indicates location of action, means, or context.'
+        explanation: '「で」 indicates the place where an action occurs, the means of performing an action, or the context of an event.'
       },
       {
         type: 'translation',
         question: 'Translate: 公園で遊びます。',
         correctAnswer: 'Play at the park.',
-        explanation: '「公園で」 means "at the park."'
+        explanation: '「公園で」 means "at the park," using 「で」 to specify the location where the action occurs.'
       },
-      // Additional Quiz Questions for Lesson 10
-{
-  type: 'multiple-choice',
-  question: 'What does 「で」 indicate?',
-  options: ['Location of existence', 'Means of action', 'Context of an action', 'All of the above'],
-  correctAnswer: 'All of the above',
-  explanation: '「で」 indicates location of action, means, or context.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 公園で遊びます。',
-  correctAnswer: 'Play at the park.',
-  explanation: '「公園で」 means "at the park."'
-},
-{
-  type: 'multiple-choice',
-  question: 'Choose the correct usage of 「で」 in a sentence.',
-  options: [
-    '図書館で本を読みます。',
-    '図書館に本を読みます。',
-    '図書館が本を読みます。',
-    '図書館の本を読みます。'
-  ],
-  correctAnswer: '図書館で本を読みます。',
-  explanation: '「図書館で」 correctly uses 「で」 to indicate the location of the action.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'Choose the correct usage of 「で」 in a sentence.',
+        options: [
+          '図書館で本を読みます。',
+          '図書館に本を読みます。',
+          '図書館が本を読みます。',
+          '図書館の本を読みます。'
+        ],
+        correctAnswer: '図書館で本を読みます。',
+        explanation: '「図書館で」 correctly uses 「で」 to indicate the location where the action of reading takes place.'
+      },
+      {
+        type: 'fill-in-the-blank',
+        question: 'Complete the sentence: バス ___ 学校へ行きます。',
+        correctAnswer: 'で',
+        explanation: '「バスで学校へ行きます。」 means "I go to school by bus." Here, 「で」 indicates the means of transportation.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: ナイフで野菜を切ります。',
+        correctAnswer: 'I cut vegetables with a knife.',
+        explanation: '「ナイフで」 specifies the means (tool) used to perform the action of cutting.'
+      }
     ],
     difficulty: 5,
     estimatedStudyTime: 20
@@ -709,68 +793,107 @@ const RAW_LESSONS = [{
     jlptLevel: 'Beginner',
     title: 'The 「に」 Particle - Time',
     grammarPoints: [
-      '「に」 is used to indicate specific points in time.'
+      '「に」 is used to indicate specific points in time.',
+      '「に」 is optional for some time expressions.',
+      '「に」 is not used with general time expressions like "morning" or "night".'
     ],
-    explanation: `
-  The 「に」 particle is used to indicate a specific time when an action takes place. 
+    explanation: 
+      'The 「に」 particle is used to indicate a specific time when an action takes place.\n\n' +
+      
+      '✅ 「に」 is required for:\n' +
+      '- Exact times: 8時に (at 8 o’clock)\n' +
+      '- Specific days: 月曜日に (on Monday)\n' +
+      '- Specific dates: 12月25日に (on December 25th)\n\n' +
   
-  Examples:
-  - 午後3時に会いましょう。 (Gogo sanji ni aimashou.) - "Let's meet at 3 PM."
-  - 毎朝7時に起きます。 (Maiasa shichiji ni okimasu.) - "I wake up at 7 AM every morning."
-      `,
+      '✅ 「に」 is optional for:\n' +
+      '- Time expressions that already imply specificity, such as "next week" or "this month".\n\n' +
+  
+      '❌ 「に」 is NOT used for general time expressions:\n' +
+      '- 朝 (morning), 昼 (afternoon), 夜 (night), 週末 (weekend), 今日 (today), 明日 (tomorrow)\n' +
+      'Example: 朝ごはんを食べます ("I eat breakfast in the morning.") - No 「に」 needed.\n\n' +
+  
+      'Examples:\n' +
+      '- 午後3時に会いましょう。 (Gogo sanji ni aimashou.) → "Let\'s meet at 3 PM."\n' +
+      '- 毎朝7時に起きます。 (Maiasa shichiji ni okimasu.) → "I get up at 7 o’clock every morning."\n' +
+      '- 来週旅行します。 (Raishuu ryokou shimasu.) → "I will travel next week." (No 「に」 needed)\n' +
+      '- 週末に映画を見ます。 (Shuumatsu ni eiga o mimasu.) → "I watch movies on weekends." (「に」 is optional)\n' +
+      '- 夜勉強します。 (Yoru benkyou shimasu.) → "I study at night." (No 「に」 needed)',
+    
     examples: [
       {
         japanese: '月曜日に学校へ行きます。',
         romanji: 'Getsuyoubi ni gakkou e ikimasu.',
-        english: 'Go to school on Monday.'
+        english: 'I go to school on Monday.'
       },
       {
         japanese: '8時に出発します。',
         romanji: 'Hachiji ni shuppatsu shimasu.',
-        english: 'Depart at 8 o’clock.'
+        english: 'I depart at 8 o’clock.'
+      },
+      {
+        japanese: '毎朝コーヒーを飲みます。',
+        romanji: 'Maiasa koohii o nomimasu.',
+        english: 'I drink coffee every morning.' // No 「に」 needed
+      },
+      {
+        japanese: '週末に友達と遊びます。',
+        romanji: 'Shuumatsu ni tomodachi to asobimasu.',
+        english: 'I hang out with friends on the weekend.' // 「に」 is optional
       }
     ],
+  
     quiz: [
       {
         type: 'multiple-choice',
         question: 'Which particle is used to indicate a specific time?',
         options: ['で', 'に', 'を', 'へ'],
         correctAnswer: 'に',
-        explanation: '「に」 is used for specific times.'
+        explanation: '「に」 is used for specific times like 3 PM or Monday.'
       },
       {
         type: 'translation',
         question: 'Translate: 毎朝6時に走ります。',
-        correctAnswer: 'I run every morning at 6 o’clock.',
-        explanation: '「毎朝6時に」 means "every morning at 6 o’clock."'
+        correctAnswers: [
+          'I run every morning at 6 o’clock.',
+          'I go running at 6 AM every morning.',
+          'I jog every morning at 6.',
+          'Every morning at 6 AM, I run.',
+          'I run at 6 AM every day.'
+        ],
+        explanation: '「毎朝6時に」 means "every morning at 6 o’clock." Since English allows for different phrasing, all of the above translations convey the same meaning.'
       },
-      // Additional Quiz Questions for Lesson 11
-{
-  type: 'multiple-choice',
-  question: 'Which particle is used to indicate a specific time?',
-  options: ['で', 'に', 'を', 'へ'],
-  correctAnswer: 'に',
-  explanation: '「に」 is used for specific times.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 毎朝6時に走ります。',
-  correctAnswer: 'I run every morning at 6 o’clock.',
-  explanation: '「毎朝6時に」 means "every morning at 6 o’clock."'
-},
-{
-  type: 'multiple-choice',
-  question: 'Choose the correct usage of 「に」 for time in a sentence.',
-  options: [
-    '午後3時に会いましょう。',
-    '午後3時で会いましょう。',
-    '午後3時を会いましょう。',
-    '午後3時へ会いましょう。'
-  ],
-  correctAnswer: '午後3時に会いましょう。',
-  explanation: '「午後3時に」 correctly uses 「に」 to indicate a specific time.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'Which of the following sentences uses 「に」 correctly for time while also being grammatically accurate?',
+        options: [
+          '私は毎朝7時に起きる。',
+          '私は毎朝7時にが起きる。',
+          '私は毎朝に7時起きる。',
+          '私は毎朝7時を起きる。'
+        ],
+        correctAnswer: '私は毎朝7時に起きる。',
+        explanation: '「に」 is used with specific times like "7時" but is not needed for general time expressions like "毎朝" (every morning). The correct structure is "毎朝7時に起きる" (I wake up at 7 AM every morning).'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'When is 「に」 NOT necessary for time expressions?',
+        options: [
+          'Monday (月曜日)',
+          'At 7:00 AM (午前7時)',
+          'On December 25th (12月25日)',
+          'At night (夜)'
+        ],
+        correctAnswer: 'At night (夜)',
+        explanation: 'General time expressions like "morning" (朝) or "night" (夜) do not require 「に」.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 私は月曜日に学校へ行きます。',
+        correctAnswer: 'I go to school on Monday.',
+        explanation: '「月曜日に」 correctly marks "Monday" as the specific time.'
+      }
     ],
+  
     difficulty: 4,
     estimatedStudyTime: 15
   },{
@@ -782,16 +905,28 @@ const RAW_LESSONS = [{
       'Counters are used with numbers to count objects, people, or events.'
     ],
     explanation: `
-  In Japanese, specific counters are used depending on the item being counted:
-  
-  Examples:
-  - General objects: ～つ
-    Example: 3つ (mittsu) - Three things.
-  - People: ～人
-    Example: 二人 (futari) - Two people.
-  - Flat objects: ～枚
-    Example: 一枚 (ichimai) - One sheet of paper.
-      `,
+      In Japanese, specific counters are used depending on the item being counted:
+      
+      Examples:
+      - **General objects:** ～つ
+        - Example: 3つ (mittsu) - Three things.
+      - **People:** ～人
+        - Example: 二人 (futari) - Two people.
+      - **Flat objects:** ～枚
+        - Example: 一枚 (ichimai) - One sheet of paper.
+      - **Long, cylindrical objects:** ～本
+        - Example: 二本 (nihon) - Two bottles.
+      - **Small animals:** ～匹
+        - Example: 三匹 (sanbiki) - Three small animals.
+      - **Machines and vehicles:** ～台
+        - Example: 一台 (ichidai) - One car.
+      - **Books:** ～冊
+        - Example: 四冊 (yonsatsu) - Four books.
+      - **Small, usually round objects:** ～個
+        - Example: 五個 (goko) - Five small items like apples.
+      
+      It's essential to choose the correct counter based on the nature of the object being counted.
+    `,
     examples: [
       {
         japanese: 'リンゴを2つください。',
@@ -802,43 +937,68 @@ const RAW_LESSONS = [{
         japanese: '写真を三枚撮りました。',
         romanji: 'Shashin o sanmai torimashita.',
         english: 'I took three pictures.'
+      },
+      {
+        japanese: '犬が五匹います。',
+        romanji: 'Inu ga gohiki imasu.',
+        english: 'There are five dogs.'
+      },
+      {
+        japanese: '車を一台買いました。',
+        romanji: 'Kuruma o ichidai kaimashita.',
+        english: 'I bought one car.'
+      },
+      {
+        japanese: '本を四冊持っています。',
+        romanji: 'Hon o yonsatsu motteimasu.',
+        english: 'I have four books.'
+      },
+      {
+        japanese: 'ペンを六個ください。',
+        romanji: 'Pen o rokkō kudasai.',
+        english: 'Please give me six pens.'
       }
     ],
     quiz: [
       {
         type: 'multiple-choice',
-        question: 'What is the counter for flat objects?',
-        options: ['つ', '人', '枚', '個'],
-        correctAnswer: '枚',
-        explanation: '「枚」 is used for flat objects like paper.'
+        question: 'What is the counter for small animals?',
+        options: ['つ', '人', '匹', '個'],
+        correctAnswer: '匹',
+        explanation: '「匹」 is used for small animals like cats and dogs.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which counter is used for books?',
+        options: ['冊', '個', '本', '匹'],
+        correctAnswer: '冊',
+        explanation: '「冊」 is used as the counter for books.'
       },
       {
         type: 'translation',
-        question: 'Translate: 猫が五匹います。',
-        correctAnswer: 'There are five cats.',
-        explanation: '「匹」 is the counter for small animals.'
+        question: 'Translate: 車を一台買いました。',
+        correctAnswers: ['I bought one car.', 'I bought 1 car.'],
+        explanation: '「一台」 is the counter for machines and vehicles like cars.'
       },
-      // Additional Quiz Questions for Lesson 12
-{
-  type: 'multiple-choice',
-  question: 'What is the counter for small animals?',
-  options: ['つ', '人', '枚', '匹'],
-  correctAnswer: '匹',
-  explanation: '「匹」 is the counter for small animals.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 猫が五匹います。',
-  correctAnswer: 'There are five cats.',
-  explanation: '「匹」 is the counter for small animals like cats.'
-},
-{
-  type: 'multiple-choice',
-  question: 'Which counter is used for books?',
-  options: ['冊', '個', '本', '匹'],
-  correctAnswer: '冊',
-  explanation: '「冊」 is used as the counter for books.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'What is the counter for long, cylindrical objects?',
+        options: ['つ', '本', '台', '冊'],
+        correctAnswer: '本',
+        explanation: '「本」 is used for long, cylindrical objects such as bottles and pencils.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 本を四冊持っています。',
+        correctAnswers: ['I have four books.', 'I have 4 books'],
+        explanation: '「四冊」 uses 「冊」 as the counter for books.'
+      },
+      {
+        type: 'fill-in-the-blank',
+        question: 'Fill in the blank: ペンを___ください。',
+        correctAnswer: '六個',
+        explanation: '「六個」 is the counter for small, usually round objects like pens.'
+      }
     ],
     difficulty: 6,
     estimatedStudyTime: 25
@@ -872,7 +1032,7 @@ const RAW_LESSONS = [{
     quiz: [
       {
         type: 'multiple-choice',
-        question: 'Which particle is used to indicate a reason?',
+        question: 'Which particle is used to indicate a reason or cause?',
         options: ['から', 'で', 'に', 'が'],
         correctAnswer: 'から',
         explanation: '「から」 is used to indicate a reason or cause.'
@@ -880,35 +1040,96 @@ const RAW_LESSONS = [{
       {
         type: 'translation',
         question: 'Translate: 雨だから、傘を持ってきました。',
-        correctAnswer: 'It’s raining, so I brought an umbrella.',
-        explanation: '「雨だから」 explains the reason for bringing an umbrella.'
+        correctAnswers: [
+          'It’s raining, so I brought an umbrella.',
+          'Because it’s raining, I brought an umbrella.',
+          'Since it’s raining, I brought an umbrella.',
+          'I brought an umbrella because it’s raining.',
+          'I brought an umbrella due to the rain.'
+        ],
+        explanation: '「雨だから」 explains the reason for bringing an umbrella. Multiple translations are possible based on phrasing in English.'
       },
-      // Additional Quiz Questions for Lesson 13
-{
-  type: 'multiple-choice',
-  question: 'Which particle is used to indicate a reason?',
-  options: ['から', 'で', 'に', 'が'],
-  correctAnswer: 'から',
-  explanation: '「から」 is used to indicate a reason or cause.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 雨だから、傘を持ってきました。',
-  correctAnswer: 'It’s raining, so I brought an umbrella.',
-  explanation: '「雨だから」 explains the reason for bringing an umbrella.'
-},
-{
-  type: 'multiple-choice',
-  question: 'Choose the correct usage of 「から」 to express reason.',
-  options: [
-    '疲れたから、早く寝ます。',
-    '疲れたで、早く寝ます。',
-    '疲れたに、早く寝ます。',
-    '疲れたが、早く寝ます。'
-  ],
-  correctAnswer: '疲れたから、早く寝ます。',
-  explanation: '「疲れたから」 correctly uses 「から」 to indicate the reason.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'Which sentence correctly expresses a reason using 「から」?',
+        options: [
+          '寒いから、ジャケットを着ました。',
+          '寒いから、ジャケットを着る？',
+          '寒いから、暑いです。',
+          '寒いから、ジャケットを着ませんでした。'
+        ],
+        correctAnswer: '寒いから、ジャケットを着ました。',
+        explanation: '「寒いから、ジャケットを着ました。」 correctly expresses a cause-and-effect relationship: "Because it is cold, I wore a jacket." Other options either misuse 「から」 with an unnatural or contradictory meaning.'
+      },
+      {
+        type: 'fill-in-the-blank',
+        question: 'Complete the sentence: 風邪をひいた(   )、学校を休みました。',
+        correctAnswer: 'から',
+        explanation: '「風邪をひいたから」 means "Because I caught a cold, I took a break from school."'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which sentence is incorrect in using 「から」 to express reason?',
+        options: [
+          '疲れたから、少し休みます。',
+          '勉強しなかったから、試験に落ちました。',
+          '彼が優しいから、人気があります。',
+          '雨が降るから、晴れています。'
+        ],
+        correctAnswer: '雨が降るから、晴れています。',
+        explanation: 
+          'Let\'s analyze each sentence and why the correct answer is incorrect:\n\n' +
+      
+          '1️⃣ **疲れたから、少し休みます。**\n' +
+          '**(Tsukareta kara, sukoshi yasumimasu.)**\n' +
+          '**Translation:** "Because I am tired, I will rest a little."\n' +
+          '**Analysis:** This correctly follows the cause-and-effect relationship using 「から」. The reason (疲れた - "I am tired") naturally leads to the result (少し休みます - "I will rest a little"). ✅\n\n' +
+      
+          '2️⃣ **勉強しなかったから、試験に落ちました。**\n' +
+          '**(Benkyou shinakatta kara, shiken ni ochimashita.)**\n' +
+          '**Translation:** "Because I did not study, I failed the exam."\n' +
+          '**Analysis:** This sentence also correctly uses 「から」 to indicate cause and effect. Not studying (勉強しなかった) is a logical reason for failing the exam (試験に落ちました). ✅\n\n' +
+      
+          '3️⃣ **彼が優しいから、人気があります。**\n' +
+          '**(Kare ga yasashii kara, ninki ga arimasu.)**\n' +
+          '**Translation:** "Because he is kind, he is popular."\n' +
+          '**Analysis:** This is another valid usage of 「から」. Being kind (優しい) logically results in popularity (人気があります). The cause-and-effect relationship makes sense. ✅\n\n' +
+      
+          '4️⃣ **雨が降るから、晴れています。**\n' +
+          '**(Ame ga furu kara, hareteimasu.)**\n' +
+          '**Translation:** "Because it is raining, it is sunny."\n' +
+          '**Analysis:** This sentence is incorrect because it presents a contradiction. Rain (雨が降る) and sunny weather (晴れています) are opposite conditions that do not logically result from one another. Since 「から」 is used to express a reason leading to a natural outcome, this sentence fails to establish a proper cause-and-effect relationship. ❌'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 宿題が多いから、遊べません。',
+        correctAnswers: [
+          'I can’t play because I have a lot of homework.',
+          'Because I have a lot of homework, I can’t play.',
+          'Since I have a lot of homework, I can’t play.',
+          'I have a lot of homework, so I can’t play.'
+        ],
+        explanation: '「宿題が多いから」 means "because I have a lot of homework," and 「遊べません」 means "I can’t play."'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which alternative to 「から」 can also express reason in Japanese?',
+        options: ['ので', 'を', 'へ', 'が'],
+        correctAnswer: 'ので',
+        explanation: '「ので」 is another way to express reason or cause, often used in more polite or formal contexts.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'What is the difference between 「から」 and 「ので」 when expressing reason?',
+        options: [
+          '「から」 is more formal, while 「ので」 is more casual.',
+          '「から」 gives a subjective reason, while 「ので」 is often more neutral or polite.',
+          'They mean completely different things and cannot be used interchangeably.',
+          '「から」 is used only in negative sentences, while 「ので」 is for positive ones.'
+        ],
+        correctAnswer: '「から」 gives a subjective reason, while 「ので」 is often more neutral or polite.',
+        explanation: '「から」 is often used for personal opinions or reasons, whereas 「ので」 is more neutral and commonly used in polite speech.'
+      }
     ],
     difficulty: 5,
     estimatedStudyTime: 20
@@ -942,10 +1163,10 @@ const RAW_LESSONS = [{
     quiz: [
       {
         type: 'multiple-choice',
-        question: 'What does 「が」 emphasize?',
-        options: ['The topic', 'The subject', 'The object', 'The location'],
-        correctAnswer: 'The subject',
-        explanation: '「が」 emphasizes or identifies the subject of the sentence.'
+        question: 'What role does the particle 「が」 typically play in a sentence?',
+        options: ['Topic marker', 'Subject marker', 'Object marker', 'Location marker'],
+        correctAnswer: 'Subject marker',
+        explanation: '「が」 is used to identify the subject of a sentence, often when introducing new information or emphasizing the subject.'
       },
       {
         type: 'translation',
@@ -953,32 +1174,66 @@ const RAW_LESSONS = [{
         correctAnswer: 'Who came?',
         explanation: '「誰が」 emphasizes "who" as the subject of the question.'
       },
-      // Additional Quiz Questions for Lesson 14
-{
-  type: 'multiple-choice',
-  question: 'What does 「が」 emphasize?',
-  options: ['The topic', 'The subject', 'The object', 'The location'],
-  correctAnswer: 'The subject',
-  explanation: '「が」 emphasizes or identifies the subject of the sentence.'
-},
-{
-  type: 'translation',
-  question: 'Translate: 誰が来ましたか？',
-  correctAnswer: 'Who came?',
-  explanation: '「誰が」 emphasizes "who" as the subject of the question.'
-},
-{
-  type: 'multiple-choice',
-  question: 'Choose the correct usage of 「が」 in a sentence.',
-  options: [
-    '猫が好きです。',
-    '猫は好きです。',
-    '猫に好きです。',
-    '猫を好きです。'
-  ],
-  correctAnswer: '猫が好きです。',
-  explanation: '「が」 is used to mark the subject in this sentence.'
-}
+      {
+        type: 'multiple-choice',
+        question: 'Which sentence correctly distinguishes between 「は」 and 「が」?',
+        options: [
+          '私が学生です。',
+          '私は学生がです。',
+          '私が学生がです。',
+          '私が学生であります。'
+        ],
+        correctAnswer: '私が学生です。',
+        explanation: '「私が学生です。」 uses 「が」 correctly to emphasize that "I" am the student, often in response to a question like "Who is the student?"'
+      },
+      {
+        type: 'fill-in-the-blank',
+        question: 'Complete the sentence with the correct particle: **彼 ___ 日本語が上手です。**',
+        correctAnswer: 'は',
+        explanation: '「彼は日本語が上手です。」 correctly uses 「は」 to mark the topic (彼), while 「が」 marks the subject (日本語).'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'In which situation would you use 「が」 instead of 「は」?',
+        options: [
+          'When introducing a new subject',
+          'When talking about a general topic',
+          'When making a contrast between two things',
+          'When expressing habitual actions'
+        ],
+        correctAnswer: 'When introducing a new subject',
+        explanation: '「が」 is commonly used when introducing a new subject or when emphasizing the subject in contrast to other elements in the sentence.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 田中さんが来ました。',
+        correctAnswers: [
+          'Tanaka-san came.',
+          'Mr. Tanaka came.',
+          'Tanaka came.',
+          'Mr. Tanaka has come.',
+          'Tanaka has come.'
+        ],
+        explanation: '「田中さんが来ました。」 emphasizes that it was Tanaka-san who arrived. Multiple translations are possible depending on the context and English phrasing.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Which sentence correctly uses 「が」 to express preference?',
+        options: [
+          '猫は好きです。',
+          '猫が好きです。',
+          '猫を好きです。',
+          '猫に好きです。'
+        ],
+        correctAnswer: '猫が好きです。',
+        explanation: '「猫が好きです。」 correctly uses 「が」 to indicate that the subject (猫) is liked.'
+      },
+      {
+        type: 'translation',
+        question: 'Translate: 映画が見たいです。',
+        correctAnswers: ['I want to watch a movie.', 'I want to see a movie.'],
+        explanation: '「映画が見たいです。」 expresses the desire to watch a movie, with 「が」 marking "movie" as the subject of the verb "want to see."'
+      }
     ],
     difficulty: 5,
     estimatedStudyTime: 20
