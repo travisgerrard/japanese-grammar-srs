@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/japanese-grammar-srs/static/css/main.8e155657.css",
-    "main.js": "/japanese-grammar-srs/static/js/main.74041370.js",
+    "main.css": "/japanese-grammar-srs/static/css/main.17a2e1df.css",
+    "main.js": "/japanese-grammar-srs/static/js/main.158ef721.js",
     "static/js/453.b262d2b6.chunk.js": "/japanese-grammar-srs/static/js/453.b262d2b6.chunk.js",
     "index.html": "/japanese-grammar-srs/index.html",
-    "main.8e155657.css.map": "/japanese-grammar-srs/static/css/main.8e155657.css.map",
-    "main.74041370.js.map": "/japanese-grammar-srs/static/js/main.74041370.js.map",
+    "main.17a2e1df.css.map": "/japanese-grammar-srs/static/css/main.17a2e1df.css.map",
+    "main.158ef721.js.map": "/japanese-grammar-srs/static/js/main.158ef721.js.map",
     "453.b262d2b6.chunk.js.map": "/japanese-grammar-srs/static/js/453.b262d2b6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8e155657.css",
-    "static/js/main.74041370.js"
+    "static/css/main.17a2e1df.css",
+    "static/js/main.158ef721.js"
   ]
 }
